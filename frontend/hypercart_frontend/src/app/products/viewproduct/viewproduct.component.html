@@ -1,0 +1,164 @@
+<div class="main-conatainer" style="max-width:fit-content;">
+    <div class="image-desc-conatiner mt-4 ">
+        <div class="col-md-6  image-container mb-5">
+
+            <div style="background-color:white;border-radius: 10px;height: 508px;width: 100%;object-fit: contain;outline: 1 px solid gray;" class="rounded-5" >
+                <img [src]="mainImage" style="width: 100%;height: 100%;object-fit: contain;outline: 1 px solid gray" alt="">
+
+            </div>
+            <div class="row g-4 mt-0">
+            <div class="col-3" *ngFor="let image of dctData['jsn_images']">
+                <div style="background-color:rgb(107 114 128/.1);cursor: pointer;" class="rounded-2" >
+                    <img src="{{hostname}}{{image}}" class="" alt="" style="width: 100%;height: 100%;object-fit: contain;" loading="lazy" (click)="changeMainImage(hostname+image)">
+
+                </div>
+            </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-6 ms-3 px-0">
+            <div>
+                <h4>{{dctData['vchr_name']}}</h4>                
+
+                <div style="display: flex;align-items: center;justify-content: start;">
+
+                    <div style="display: flex;align-items: center;justify-content: center;margin-left: 0px;">
+                        <img src="assets/images/star_icon.svg" alt="" width="16px" height="16px" style="margin-right: 2px;">
+                        <img src="assets/images/star_icon.svg" alt="" width="16px" height="16px" style="margin-right: 2px;">
+                        <img src="assets/images/star_icon.svg" alt="" width="16px" height="16px" style="margin-right: 2px;">
+                        <img src="assets/images/star_icon.svg" alt="" width="16px" height="16px" style="margin-right: 2px;">
+                        <img src="assets/images/star_dull_icon.svg" alt="" width="16px" height="16px">
+
+                    </div>
+                    <p style="color: #374151;font-size: 16px;display: flex;align-items: center;justify-content: center;padding-top: 1px;margin-left: 2px;" class=" m-0 ms-2">(4.5) 
+                    </p>
+                </div>
+                <p class="mt-3" style="color: #4B5563;">{{dctData['vchr_description']}}</p>
+                <div class="mt-4 mb-4">
+                    <p><span class="fs-3 fw-medium">₹{{dctData['dbl_offer_price']}}</span><span class="fs-6 fw-normal ms-2" style="color: #1F293799"><s>₹{{dctData['dbl_selling_price']}}</s> </span></p>
+                </div>
+                <hr>
+                <div class="mt-5">
+                    <table style="max-width: 70%;width: 40%;">
+                        <tr>
+                            <td style="color: #4B5563;font-weight: 600;">Brand</td>
+                            <td style="color: #1F293780;">Generic</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #4B5563;font-weight: 600;">Color</td>
+                            <td style="color: #1F293780;">Multi</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #4B5563;font-weight: 600;">Category</td>
+                            <td style="color: #1F293780;">{{dctData['fk_category__vchr_name']}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="w-100 d-flex gap-4 mt-5">
+                    <button class="btn" style="background-color: #F3F4F6;color: #1F2937CC;" class="rounded-0 border-0 w-100 py-3" (click)="buyProduct(1)" *ngIf="dctData['int_stock_qty']>0">Add to Cart</button>
+                    <button class="btn" style="background-color: #ea580c;color: white;" class="rounded-0 border-0 w-100 py-3" (click)="buyProduct(2)" *ngIf="dctData['int_stock_qty']>0">Buy Now</button>
+
+                    <button class="btn" style="background-color: #F3F4F6;color: #1F2937CC;" class="rounded-0 border-0 w-100 py-3" (click)="buyProduct(1)" disabled *ngIf="dctData['int_stock_qty']<=0">Out Of Stock</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="feat-prod-container mt-5">
+        <div class="d-flex flex-column align-items-center justify-content-center">
+            <h3 class="fs-3 mb-1 fw-medium">Featured <span style="color: #ea580c;">Products</span></h3>
+            <div style="background-color: #ea580c;height: 2px;width: 100px;"></div>
+        </div>
+
+     <div class="row mt-5 mb-5">
+      <div class="col-6 col-md-6 col-lg-4  col-xl-3 mb-5" *ngFor="let data of lstData" (click)="viewProduct(data['id'])">
+        <div>
+          <div style="width: 210px;height: 220px;background-color: rgb(107 114 128/.1);cursor: pointer;max-width: 100%;" class="p-3 rounded-2 position-relative">
+            <div style="
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background-color: white;
+        font-size: 12px;width: 26px;height: 26px;    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+" class="p-0 rounded-circle d-flex align-items-center justify-content-center"><i class="fa-regular fa-heart" ></i></div>
+            <img src="{{hostname+ data['jsn_images'][0]}}" class="prod-image" loading="lazy" alt="imgg" style="width: 100%;height: 100%;object-fit: contain;mix-blend-mode: multiply" >
+          </div>
+          <div style="width: 210px;max-width: 100%;">
+            <p class="fw-medium mb-0 mt-1 pb-0" style="font-size: 16px;color: #374151;white-space: nowrap;overflow: hidden;
+    text-overflow: ellipsis;">{{data['vchr_name']}}</p>
+            <p style="font-size: 12px;color: #6B7280b3;white-space: nowrap;overflow: hidden;
+    text-overflow: ellipsis;width: 100%;" class="pb-0 mb-0" >{{data['vchr_description']}}</p>
+            <div style="display: flex;align-items: center;justify-content: start;">
+              <p style="color: #374151;font-size: 12px;display: flex;align-items: center;justify-content: center;padding-top: 1px;" class=" m-0">4.5 
+              </p>
+              <div style="display: flex;align-items: center;justify-content: center;margin-left: 4px;">
+                  <img src="assets/images/star_icon.svg" alt="" width="12px" height="12px">
+                  <img src="assets/images/star_icon.svg" alt="" width="12px" height="12px">
+                  <img src="assets/images/star_icon.svg" alt="" width="12px" height="12px">
+                  <img src="assets/images/star_icon.svg" alt="" width="12px" height="12px">
+                  <img src="assets/images/star_dull_icon.svg" alt="" width="12px" height="12px">
+
+                </div>
+            </div>
+
+            <div>
+              <p *ngIf="data['int_stock_qty']<=0" style="color: rgba(255, 0, 0, 0.808);">Out Of Stock</p>
+              <p *ngIf="data['int_stock_qty']>0" style="color:rgb(5, 150, 5)">In Stock</p>
+
+            </div>
+            <div class="d-flex  align-items-center">
+              <p style="color: #374151;font-weight: 600;" class="mb-0 pb-0 me-3">₹{{data['dbl_offer_price']}}</p>
+              <p style="color: #3e495c96;font-weight: 600;" class="mb-0 pb-0"><s>₹{{data['dbl_selling_price']}}</s> </p>
+              
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+              <button class="btn  bg-white border-1 rounded-5 px-5" style="font-size: 12px;color: #6B7280;border-color: rgba(128, 128, 128, 0.211);">Shop Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row mb-5">
+      <div class="col-12" class="d-flex align-items-center justify-content-center mb-5">
+              <button routerLink="/products/all_products" class="btn  bg-white border-1 rounded-2 px-5" style="font-size: 17px;color: #6B7280;border-color: rgba(128, 128, 128, 0.211);">See More</button>
+
+      </div>
+
+    </div>
+
+      <div class="mt-5 d-flex align-items-center justify-content-center row lower-about-section">
+        <div class="col-md-6 pe-5">
+          <h2 class="fs-3 fw-bold"><span style="color: #ea580c;">H</span>yperCart</h2>
+          <p class="fw-normal" style="color: #6B7280;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quas officiis quo repudiandae placeat sint magnam quod id exercitationem veritatis veniam quidem repellat laboriosam quisquam, laudantium dignissimos odit voluptatibus culpa.</p>
+        </div>
+        <div class="col-md-3">
+          <ul style="list-style-type: none;">
+            <li class="fw-medium mb-3 mt-0">Company</li>
+            <li style="font-size: 14px;color: #6B7280;">Home</li>
+            <li style="font-size: 14px;color: #6B7280;">About Us</li>
+            <li style="font-size: 14px;color: #6B7280;">Conatact Us</li>
+            <li style="font-size: 14px;color: #6B7280;">Privacy Policy</li>
+
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul style="list-style-type: none;">
+            <li class="fw-medium mb-3 mt-0">Get in Touch</li>
+            <li style="font-size: 14px;color: #6B7280;">+62 72622333</li>
+            <li style="font-size: 14px;color: #6B7280;">contacthypercart.com</li>
+            <li style="font-size: 14px;color: #6B7280;">Conatact Us</li>
+            <li style="font-size: 14px;color: #6B7280;">Privacy Policy</li>
+
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+</div>

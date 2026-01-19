@@ -1,0 +1,25 @@
+<body class="d-flex flex-column align-items-center justify-content-center">
+  <div style="width: 360px;background-color: white;box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);" class="d-flex flex-column align-items-center justify-content-center px-4 py-5 rounded-2">
+    <p class="fs-4 text-center fw-bold mb-4">Sign Up</p>
+    <div class="w-100">
+        <input type="text" placeholder="Full Name" class="form-control w-100 pe-5" [(ngModel)]="strName">       
+    </div>
+    <div class="w-100 mt-3">
+        <input type="text" placeholder="Email" class="form-control w-100 pe-5" [(ngModel)]="strEmail">       
+    </div>
+    <div class="mt-3 w-100" style="position: relative;">
+        <input [type]="blnShowPassword1?'text':'password'"   placeholder="Password" class="form-control w-100 pe-5"            [(ngModel)]="strPassword"> 
+        <i [class]="blnShowPassword1?'fa fa-eye-slash': 'fa-solid fa-eye'" style="position: absolute;right: 10px;z-index: 999;top:10px;font-size: 14px;cursor: pointer;" (click)="blnShowPassword1=!blnShowPassword1"></i>      
+    </div>
+    
+    <div class="mt-3 w-100" style="position: relative;">
+        <input [type]="blnShowPassword2?'text':'password'"   placeholder="Confirm Password" class="form-control w-100 pe-5"      [(ngModel)]="strConfirmPassword"> 
+        <i [class]="blnShowPassword2?'fa fa-eye-slash': 'fa-solid fa-eye'" style="position: absolute;right: 10px;z-index: 999;top:10px;font-size: 14px;cursor: pointer;" (click)="blnShowPassword2=!blnShowPassword2"></i>      
+    </div>
+
+
+    <button class="btn w-100 mt-4 text-white" style="background-color: #ea580c;" (click)="Register()">REGISTER</button>
+
+</div>  
+</body>
+

@@ -1,0 +1,278 @@
+<div  class="products-home-container">
+
+    <div>
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+  <!-- Indicators -->
+  <div class="carousel-indicators" style="bottom: -50px;">
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active rounded-circle"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" class="rounded-circle"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" class="rounded-circle"></button>
+  </div>
+
+  <!-- Slides -->
+  <div class="carousel-inner">
+    <div class="carousel-item active ">
+
+      <div class="carousel-content">
+              <div class="d-flex flex-column carousel-caption justify-content-start align-items-start  products-caption" >
+        <h6 style="color: #ea580c;font-weight: 500;font-size: 1rem;">Limited Time Offer 30% Off</h6>
+        <h2 style="font-weight: 700;color:#374151;">Experience Pure Sound - Your Perfect Headphones Awaits!</h2>
+        <div class="d-flex align-items-center justify-content-center cursor-pointer" style="cursor: pointer;">
+          <button style="background-color: #ea580c;" class="btn rounded-5 text-white px-5 py-2 me-4" (click)="redirectToView(10)">Shop Now</button>
+          <p class="pb-0 mb-0" style="color: #374151;">Explore Deals <span><i class="fa-solid fa-arrow-right-long"></i></span></p>
+        </div>
+      </div>
+        <img src="assets/images/header_headphone_image.png" class="d-block w-50 ms-auto my-5 carousel-image" alt="Slide 1">
+      </div>
+
+
+    </div>
+
+
+        <div class="carousel-item ">
+
+    <div class="carousel-content">
+      <div class="d-flex flex-column carousel-caption justify-content-start align-items-start  products-caption" >
+        <h6 style="color: #ea580c;font-weight: 500;font-size: 1rem;">Hurry up only few lefts!</h6>
+        <h2 style="font-weight: 700;color:#374151;">Next-Level Gaming Starts Here - Discover PlayStation 5 Today!</h2>
+        <div class="d-flex align-items-center justify-content-center cursor-pointer" style="cursor: pointer;">
+          <button style="background-color: #ea580c;" class="btn rounded-5 text-white px-5 py-2 me-4" (click)="redirectToView(7)">Shop Now</button>
+          <p class="pb-0 mb-0" style="color: #374151;">Explore Deals <span><i class="fa-solid fa-arrow-right-long"></i></span></p>
+        </div>
+      </div>
+        <img src="assets/images/playstation_image.png" class="d-block w-50 ms-auto my-5 carousel-image" alt="Slide 1">
+      </div>
+    </div>
+
+
+        <!-- <div class="carousel-item  ">
+
+
+      <div class="d-flex flex-column carousel-caption justify-content-start align-items-start products-caption mt-3" >
+        <h6 style="color: #ea580c;font-weight: 500;font-size: 1rem;">Exclusive Deal 40% Off</h6>
+        <h2 style="font-weight: 700;color:#374151;">Power Meets Elegance - Apple MacBook Pro is Here for you!</h2>
+        <div class="d-flex align-items-center justify-content-center cursor-pointer" style="cursor: pointer;">
+          <button style="background-color: #ea580c;" class="btn rounded-5 text-white px-5 py-2 me-4" (click)="redirectToView(9)">Shop Now</button>
+          <p class="pb-0 mb-0" style="color: #374151;">Explore Deals <span><i class="fa-solid fa-arrow-right-long"></i></span></p>
+        </div>
+      </div>
+        <img src="assets/images/macbook_image.png" class=" w-50  carousel-image" alt="Slide 1">
+
+    </div> -->
+
+            <div class="carousel-item ">
+
+      <div class="carousel-content">
+      <div class="d-flex flex-column carousel-caption justify-content-start align-items-start  products-caption" >
+        <h6 style="color: #ea580c;font-weight: 500;font-size: 1rem;">Hurry up only few lefts!</h6>
+        <h2 style="font-weight: 700;color:#374151;">Power Meets Elegance - Apple MacBook Pro is Here for you!</h2>
+        <div class="d-flex align-items-center justify-content-center cursor-pointer" style="cursor: pointer;">
+          <button style="background-color: #ea580c;" class="btn rounded-5 text-white px-5 py-2 me-4" (click)="redirectToView(9)">Shop Now</button>
+          <p class="pb-0 mb-0" style="color: #374151;">Explore Deals <span><i class="fa-solid fa-arrow-right-long"></i></span></p>
+        </div>
+      </div>
+        <img src="assets/images/macbook_image.png" class="d-block w-50 ms-auto my-5 carousel-image" alt="Slide 1">
+      </div>
+    </div>
+
+  </div>
+
+  
+</div>
+
+
+    </div>
+
+    <div style="margin-top:65px;width: 100%;display: flex;" class="row">
+
+      <div class="col-12">
+            <button
+  *ngFor="let label of lstCategory; let i = index"
+  class="btn rounded-5 px-4 py-2 me-4 category-btn mb-3"
+  style="  background-color: #f3f4f6;color: #374151; font-weight: 500;border: 1px solid #d1d5db;transition: all 0.2s ease;"
+  (click)="setActive(i,label)"
+  [ngClass]="{ 'active-btn': selectedIndex === i }"
+>
+  {{ label['vchr_name'] }}
+</button>    
+      </div>
+
+
+    </div>
+
+     <div class="row mt-5 mb-5">
+      <div class="col-6 col-md-6 col-lg-4  col-xl-3 mb-5" *ngFor="let data of lstData" (click)="viewProduct(data['id'])">
+        <div>
+          <div style="width: 210px;height: 220px;background-color: transparent;cursor: pointer;max-width: 100%;border: 1px solid rgba(0, 0, 0, 0);box-shadow: 0 2px 6px rgba(0,0,0,0.25)" class="p-2 rounded-2 position-relative">
+            <div style="
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background-color: white;
+        font-size: 12px;width: 26px;height: 26px;z-index: 999;    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+" class="p-0 rounded-circle d-flex align-items-center justify-content-center"><i class="fa-regular fa-heart" ></i></div>
+            <img src="{{hostname}}{{data['jsn_images'][0]}}" alt="imgg" height="100%" width="100%" style="object-fit: contain;overflow: hidden;" class="prod-image">
+          </div>
+          <div style="width: 210px;max-width: 100%;">
+            <p class="fw-medium mb-0 mt-1 pb-0" style="font-size: 16px;color: #374151;white-space: nowrap;overflow: hidden;
+    text-overflow: ellipsis;">{{data['vchr_name']}}</p>
+            <p style="font-size: 12px;color: #6B7280b3;white-space: nowrap;overflow: hidden;
+    text-overflow: ellipsis;width: 100%;" class="pb-0 mb-0" >{{data['vchr_description']}}</p>
+            <div style="display: flex;align-items: center;justify-content: start;">
+              <p style="color: #374151;font-size: 12px;display: flex;align-items: center;justify-content: center;padding-top: 1px;" class=" m-0">4.5 
+              </p>
+              <div style="display: flex;align-items: center;justify-content: center;margin-left: 4px;">
+                  <img src="assets/images/star_icon.svg" alt="" width="12px" height="12px">
+                  <img src="assets/images/star_icon.svg" alt="" width="12px" height="12px">
+                  <img src="assets/images/star_icon.svg" alt="" width="12px" height="12px">
+                  <img src="assets/images/star_icon.svg" alt="" width="12px" height="12px">
+                  <img src="assets/images/star_dull_icon.svg" alt="" width="12px" height="12px">
+
+                </div>
+            </div>
+            <div>
+              <p *ngIf="data['int_stock_qty']<=0" style="color: rgba(255, 0, 0, 0.808);">Out Of Stock</p>
+              <p *ngIf="data['int_stock_qty']>0" style="color:rgb(5, 150, 5)">In Stock</p>
+
+            </div>
+            <div class="d-flex  align-items-center">
+              <p style="color: #374151;font-weight: 600;" class="mb-0 pb-0 me-3">₹{{data['dbl_offer_price']}}</p>
+              <p style="color: #3e495c96;font-weight: 600;" class="mb-0 pb-0"><s>₹{{data['dbl_selling_price']}}</s> </p>
+              
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+              <button class="btn  bg-white border-1 rounded-5 px-5" style="font-size: 12px;color: #6B7280;border-color: rgba(128, 128, 128, 0.211);">Shop Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row mb-5">
+      <div class="col-12" class="d-flex align-items-center justify-content-center mb-5">
+              <button routerLink="/products/all_products" class="btn  bg-white border-1 rounded-2 px-5" style="font-size: 17px;color: #6B7280;border-color: rgba(128, 128, 128, 0.211);">See More</button>
+
+      </div>
+
+    </div>
+
+    <div class="more-section mb-5">
+      <div class="d-flex flex-column align-items-center justify-content-center mb-5">  
+        <h3 class="text-center mb-2">Featured Products</h3>
+        <div style="height: 3px;width: 160px;background-color: red;color: red;"></div>
+      </div>
+      <div >
+        <div class="row">
+
+          <div class="col-md-6 col-lg-4 px-3 py-3 img-wrapper">
+            <img
+              src="assets/images/headphone-man-3.avif"
+              alt="image"
+              class="img-fluid main-img"
+            >
+
+            <div class="feat-prods-header-text">
+              <p class="fw-medium fs-4 text-white" style="max-width: 80%;">Unparalleled Sound</p>
+              <p class="fw-normal fs-6 text-white" style="max-width: 90%;">
+                Experience crystal-clear audio with premium headphones.
+              </p>
+              <button class="btn rounded-1 text-white" style="background-color: #ea580c;" (click)="redirectToView(10)">
+                Buy Now <i class="fa fa-external-link"></i>
+              </button>
+            </div>
+          </div>
+
+
+          <div class="col-md-6 col-lg-4 px-3 py-3 img-wrapper">
+            <img
+              src="assets/images/man-earphones.jpg"
+              alt="image"
+              class="img-fluid main-img"
+            >
+
+            <div class="feat-prods-header-text">
+              <p class="fw-medium fs-4 text-white" style="max-width: 70%;">Stay Connected</p>
+              <p class="fw-normal fs-6 text-white" style="max-width: 90%;">
+                Compact and stylish earphones for every occasion.
+              </p>
+              <button class="btn rounded-1 text-white" style="background-color: #ea580c;" (click)="redirectToView(3)">
+                Buy Now <i class="fa fa-external-link"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 px-3 py-3 img-wrapper">
+            <img
+              src="assets/images/boy_with_laptop_image.png"
+              alt="image"
+              class="img-fluid main-img"
+            >
+
+            <div class="feat-prods-header-text">
+              <p class="fw-medium fs-4 text-white" style="max-width: 80%;">Power in every Pixel</p>
+              <p class="fw-normal fs-6 text-white" style="max-width: 80%;">
+                Shop the latest laptops for work, gaming, and more.
+              </p>
+              <button class="btn rounded-1 text-white" style="background-color: #ea580c;" (click)="redirectToView(9)">
+                Buy Now <i class="fa fa-external-link"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class=" buy-now-container">
+        <div style="width: 33%;height: 100%;overflow: hidden;display: flex;align-items: center;justify-content: center;">
+          <img src="assets/images/jbl_soundbox_image.png"  style="aspect-ratio:783/669 ;height: 262px;width: 224px;"  alt="">
+        </div>
+        <div style="width: 27%;" class="d-flex flex-column align-items-center justify-content-center py-3">
+          <p class="fw-bold fs-3 text-center mb-3">Level Up Your Gaming Experience</p>
+          <p class="fw-medium text-center" style="color: #1F293799;">From immersive sound to precise controls—everything you need to win</p>
+          <button class="btn rounded-1 text-white w-100" style="background-color: #ea580c;">
+            Buy Now <i class="fa fa-arrow-right-long"></i>
+          </button>
+        </div>
+        <div style="width: 40%;overflow: hidden;display: flex;justify-content: end;" class="controller-image-container">
+          <img src="assets/images/md_controller_image.png"  height="302px"  alt="" style="max-width: 100%;aspect-ratio:1173/1110 ;">
+        </div>
+      </div>
+
+      <div>
+        <p class="fw-medium fs-2 text-center mb-3" style="color: #374151;">Subscribe now & get 20% off</p>
+        <p class="fw-medium fs-6 text-center" style="color: #6B7280CC;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+
+</p>
+        <div class="d-flex align-items-center justify-content-center mt-5 w-100">
+          <input type="text" class="form-control" name="" id="" style="width:480px;border-right: 0;height: 55px;max-width: 50%;" placeholder="Enter Your Email Id">
+          <button class="btn px-5 py-2 text-white" style="background-color: #ea580c;border-top-left-radius: 0px;border-bottom-left-radius: 0px;height: 55px;">Subscribe</button>
+        </div>
+      </div>
+
+      <div class="mt-5 d-flex align-items-start justify-content-start row lower-about-section">
+        <div class="col-md-6 pe-5 pt-0 mt-0 d-flex align-items-start justify-content-start flex-column">
+          <p class="fs-3 fw-bold mt-0 pt-0"><span style="color: #ea580c;" class="mt-0 pt-0">H</span>yperCart</p>
+          <p class="fw-normal" style="color: #6B7280;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quas officiis quo repudiandae placeat sint magnam quod id exercitationem veritatis veniam quidem repellat laboriosam quisquam, laudantium dignissimos odit voluptatibus culpa.</p>
+        </div>
+        <div class="col-md-3">
+          <ul style="list-style-type: none;">
+            <li class="fw-medium mb-3 mt-0">Company</li>
+            <li style="font-size: 14px;color: #6B7280;">Home</li>
+            <li style="font-size: 14px;color: #6B7280;">About Us</li>
+            <li style="font-size: 14px;color: #6B7280;">Conatact Us</li>
+            <li style="font-size: 14px;color: #6B7280;">Privacy Policy</li>
+
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul style="list-style-type: none;display: flex;flex-direction: column;">
+            <li class="fw-medium mb-3 mt-0">Get in Touch</li>
+            <li style="font-size: 14px;color: #6B7280;">+62 72622333</li>
+            <li style="font-size: 14px;color: #6B7280;">contacthypercart.com</li>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+</div>

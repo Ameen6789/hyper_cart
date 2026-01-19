@@ -1,0 +1,8 @@
+body{
+    height: 100vh;
+}
+.form-control:focus{
+    outline: 1 px solid rgba(0, 0, 0, 0.452);
+    border: 1px solid rgba(0, 0, 0, 0.495);
+    box-shadow: none;
+}

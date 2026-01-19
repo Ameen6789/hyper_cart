@@ -1,0 +1,54 @@
+<div class="main-container mt-5 mb-5">
+    <div class="sub-container w-100">
+            <div class="left-container">
+        <h5 class="mb-5 fw-semibold">Add Shipping <span style="color: #ea580c;">Address</span> </h5>
+        <form action="">
+            <input type="text" name="strName" id="" [(ngModel)]="strName" placeholder="Full Name" class="ps-2 py-2 form-control">
+            <input type="number" name="intMobile" id="" [(ngModel)]="intMobile" placeholder="Phone Number" class="ps-2 py-2 form-control mt-3">
+            <input type="number" name="intPincode" id="" [(ngModel)]="intPincode" placeholder="Pin Code" class="ps-2 py-2 form-control mt-3">
+            <textarea name="strAddress" id="" [(ngModel)]="strAddress" placeholder="Address (Area and Street)" rows="5" class="ps-2 py-2 form-control mt-3" style="resize: none;"></textarea>
+            <div class="d-flex">
+                <input type="text" name="strCity" id="" [(ngModel)]="strCity" placeholder="City/District/Town" class="ps-2 py-2 form-control mt-3 me-3">
+                <input type="text" name="strState" id="" [(ngModel)]="strState" placeholder="State" class="ps-2 py-2 form-control mt-3">
+            </div>
+            <button class="btn text-white py-3 px-2 w-100 rounded-1 mt-4" style="background-color: #ea580c;" (click)="saveAddress()">Save Address</button>
+        </form>
+
+
+
+
+    </div>
+    <div class="right-container">
+        <img src="assets/images/my_location_image.svg" alt="" class="ms-2">
+    </div>
+    </div>
+
+          <div class=" d-flex align-items-start justify-content-center row lower-about-section">
+        <div class="col-md-6 pe-5">
+          <p class="fs-3 fw-bold"><span style="color: #ea580c;">H</span>yperCart</p>
+          <p class="fw-normal" style="color: #6B7280;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quas officiis quo repudiandae placeat sint magnam quod id exercitationem veritatis veniam quidem repellat laboriosam quisquam, laudantium dignissimos odit voluptatibus culpa.</p>
+        </div>
+        <div class="col-md-3">
+          <ul style="list-style-type: none;">
+            <li class="fw-medium mb-3 mt-0">Company</li>
+            <li style="font-size: 14px;color: #6B7280;">Home</li>
+            <li style="font-size: 14px;color: #6B7280;">About Us</li>
+            <li style="font-size: 14px;color: #6B7280;">Conatact Us</li>
+            <li style="font-size: 14px;color: #6B7280;">Privacy Policy</li>
+
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul style="list-style-type: none;">
+            <li class="fw-medium mb-3 mt-0">Get in Touch</li>
+            <li style="font-size: 14px;color: #6B7280;">+62 72622333</li>
+            <li style="font-size: 14px;color: #6B7280;">contacthypercart.com</li>
+            <li style="font-size: 14px;color: #6B7280;">Conatact Us</li>
+            <li style="font-size: 14px;color: #6B7280;">Privacy Policy</li>
+
+          </ul>
+        </div>
+      </div>
+</div>
+
+

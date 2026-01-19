@@ -1,0 +1,140 @@
+<div class="main-container d-flex">
+    <div class="nav-container">
+        <nav>
+            <ul class="ps-0 pt-2 navbar-nav">
+                <li class="d-flex align-items-center justify-content-start "> 
+                    <a routerLink="/seller/addproduct" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="px-3 py-2 d-flex  active">
+                        <i class="fa-regular fa-square-plus" ></i>
+                        <span class="nav-text d-md-flex align-items-center">Add Product</span> 
+                    </a>
+                </li>
+
+                <li class="d-flex align-items-center justify-content-start "> 
+                    <a routerLink="/seller/listproduct" routerLinkActive="active" class="px-3 py-2 d-flex">
+                        <i class="fa-solid fa-list-check " ></i> 
+                        <span class="nav-text d-md-flex align-items-center"> Product List</span>
+                    </a>
+                </li>
+
+                <li class=" d-flex align-items-center justify-content-start "> 
+                    <a routerLink="/seller/orders" routerLinkActive="active" class="px-3 py-2 d-flex">
+                        <i class="fa-solid fa-box-open "></i> 
+                        <span class="nav-text d-md-flex align-items-center">All Orders</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="right-container p-4" style="max-width: 490px;">
+        
+        <div>
+            <p class="fw-semibold">Product Image</p>
+
+            <div class="d-flex flex-wrap" >
+                <input type="file" id="uploadImage1" hidden  accept="image/jpeg,image/png" (change)="onFileChange1($event)">
+
+                <div class="d-flex flex-column">
+                    <img [src]=image1   
+                            alt="Upload"
+                            width="96"
+                            height="56"
+                            class="me-3 mb-3"
+                            
+                    >
+                    <div class="d-flex align-items-center justify-content-center">
+                        <label for="uploadImage1" style="cursor: pointer;" >
+                            <div class="btn text-white px-1 py-1" style="background-color: #ea580c;font-size: 12px;"><i class="fa fa-pencil" title="Change Image"></i></div>
+
+                        </label>
+                        <div class="btn text-white px-1 py-1 ms-2" style="background-color: red;font-size: 12px;" (click)="removeImage(1)"><i class="fa fa-trash" title="Remove Image"></i></div>
+
+                    </div>
+                </div>
+
+                <input type="file" id="uploadImage2" hidden accept="image/jpeg,image/png" (change)="onFileChanged2($event)">
+                <div class="d-flex flex-column">
+                    <img [src]=image2  alt="" width="96px" height="56px" class="me-3 mb-3" >
+                    <div class="d-flex align-items-center justify-content-center">
+                        <label for="uploadImage2" style="cursor: pointer;" >
+                            <div class="btn text-white px-1 py-1" style="background-color: #ea580c;font-size: 12px;"><i class="fa fa-pencil" title="Change Image"></i></div>
+
+                        </label>
+                        <div class="btn text-white px-1 py-1 ms-2" style="background-color: red;font-size: 12px;" (click)="removeImage(2)"><i class="fa fa-trash" title="Remove Image"></i></div>
+
+                    </div>
+
+
+                </div>
+
+                <input type="file" name="" id="uploadImage3" hidden accept="image/jpeg,image/png" (change)="onFileChanged3($event)">
+                <div class="d-flex flex-column">
+                    <img [src]=image3 alt="" width="96px" height="56px" class="me-3 mb-3">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <label for="uploadImage3" style="cursor: pointer;" >
+                            <div class="btn text-white px-1 py-1" style="background-color: #ea580c;font-size: 12px;"><i class="fa fa-pencil" title="Change Image"></i></div>
+
+                        </label>
+                        <div class="btn text-white px-1 py-1 ms-2" style="background-color: red;font-size: 12px;" (click)="removeImage(3)"><i class="fa fa-trash" title="Remove Image"></i></div>
+
+                    </div>
+                </div>
+
+                <input type="file" name="" id="uploadImage4" hidden accept="image/jpeg,image/png" (change)="onFileChanged4($event)">
+                <div class="d-flex flex-column">
+                    <img [src]=image4 alt="" width="96px" height="56px" class="mb-3">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <label for="uploadImage4" style="cursor: pointer;" >
+                            <div class="btn text-white px-1 py-1" style="background-color: #ea580c;font-size: 12px;"><i class="fa fa-pencil" title="Change Image"></i></div>
+
+                        </label>
+                        <div class="btn text-white px-1 py-1 ms-2" style="background-color: red;font-size: 12px;" (click)="removeImage(4)"><i class="fa fa-trash" title="Remove Image"></i></div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        
+
+
+        <div class="mt-3">
+            <p class="fw-semibold">Product Name</p>
+
+            <input type="text" name="" id="" required [(ngModel)]="strProduct" placeholder="Enter Product" class="ps-2 form-control">
+        </div>
+        <div class="mt-4">
+            <p class="fw-semibold">Product Description</p>
+            <textarea name="" id="" required rows="5" [(ngModel)]="strProductDescription" placeholder="Product Description" class="ps-2 form-control" style="resize: none;"></textarea>
+        </div>
+
+        <div class="d-md-flex mt-4 row">
+            <div class="col-6  col-md-6 pe-3 mb-3">
+                <p class="fw-semibold">Category</p>
+                <select name="" id="" class="form-select" [(ngModel)]="selectedCategory"
+                 (ngModelChange)="categoryChanged($event)" [compareWith]="compareCategory">
+                    <option   *ngFor="let cat of lstCategory" [ngValue]="cat">{{cat.vchr_name}}</option>
+
+                </select>
+            </div >
+            <div class="col-6 col-md-6">
+                <p class="fw-semibold">Stock</p>
+
+                <input type="number" name="" required id="" [(ngModel)]="intStock" min="0"  placeholder="0" class="ps-2 form-control">
+            </div>
+            <div class="col-6  col-md-6 pe-3">
+                <p class="fw-semibold">Product Price</p>
+
+                <input type="number" name="" required id=""  [(ngModel)]="intProductPrice" placeholder="0" class="ps-2 form-control">
+            </div>
+            <div class="col-6 col-md-6">
+                <p class="fw-semibold">Offer Price</p>
+
+                <input type="number" name="" required id=""  [(ngModel)]="intOfferPrice" placeholder="0" class="ps-2 form-control">
+            </div>
+        </div>
+        <button class="btn text-white mt-2 px-4 rounded-1" style="background-color: #ea580c;" (click)="updateProduct()">UPDATE</button>
+
+    </div>
+</div>

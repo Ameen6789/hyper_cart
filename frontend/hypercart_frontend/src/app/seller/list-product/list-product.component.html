@@ -1,0 +1,101 @@
+<div class="main-container d-flex">
+    <div class="nav-container">
+        <nav>
+            <ul class="ps-0 pt-2 navbar-nav">
+                <li class="d-flex align-items-center justify-content-start "> 
+                    <a routerLink="/seller/addproduct" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="px-3 py-2 d-flex  active">
+                        <i class="fa-regular fa-square-plus" ></i>
+                        <span class="nav-text d-md-flex align-items-center">Add Product</span> 
+                    </a>
+                </li>
+
+                <li class="d-flex align-items-center justify-content-start "> 
+                    <a routerLink="/seller/listproduct" routerLinkActive="active" class="px-3 py-2 d-flex">
+                        <i class="fa-solid fa-list-check " ></i> 
+                        <span class="nav-text d-md-flex align-items-center"> Product List</span>
+                    </a>
+                </li>
+
+                <li class=" d-flex align-items-center justify-content-start "> 
+                    <a routerLink="/seller/orders" routerLinkActive="active" class="px-3 py-2 d-flex">
+                        <i class="fa-solid fa-box-open "></i> 
+                        <span class="nav-text d-md-flex align-items-center">All Orders</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="right-container p-4 pt-5 ms-2" style="width: 100%;">
+        <div>
+            <p class="fw-semibold fs-5" style="color: #374151;">All Products</p>
+    <div class="table-container" style="width:100%;">
+    <table style="
+        width:100%;
+        min-width:700px;
+        border:1px solid #37415147;
+        border-radius:5px;
+        border-collapse:separate;
+        border-spacing:0;
+    ">
+        <thead>
+            <tr style="background:#f9fafb;">
+                <th style="padding:12px; border-bottom:1px solid #37415147;">Product</th>
+                <th style="padding:12px; border-bottom:1px solid #37415147;">Category</th>
+                <th style="padding:12px; border-bottom:1px solid #37415147;">Price</th>
+                <th style="padding:12px; border-bottom:1px solid #37415147;">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let prod of lstProducts">
+                <td style="
+                    padding:12px;
+                    border-bottom:1px solid #37415147;
+                    word-break:break-word;
+                ">
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center justify-content-center me-2 rounded-1"
+                            style="background-color: rgba(128,128,128,0.126);
+                                    width:65px;
+                                    height:65px;
+                                    flex-shrink:0;"
+                            *ngIf="prod['jsn_images'] && prod['jsn_images'][0]">
+                            <img src="{{hostname}}{{prod['jsn_images'][0]}}"
+                                 alt="img"
+                                 width="49"
+                                 height="49">
+                        </div>
+
+                        <p class="mb-0" style="word-break:break-word;word-break:break-word;
+    white-space:normal;">
+                            {{prod['vchr_name']}}
+                        </p>
+                    </div>
+                </td>
+
+                <td style="
+                    padding:12px;
+                    border-bottom:1px solid #37415147;
+                    word-break:break-word;
+                ">
+                    {{prod['fk_category__vchr_name']}}
+                </td>
+
+                <td style="padding:12px; border-bottom:1px solid #37415147;">
+                    ₹{{prod['dbl_selling_price']}}
+                </td>
+
+                <td style="padding:12px; border-bottom:1px solid #37415147;">
+
+                    <i class="fa-solid fa-eye me-2" title="View Product" style="cursor: pointer;color:#ea580c;" (click)="viewProduct(prod)"></i>
+                    <i class="fa-solid fa-pencil ms-2" title="Edit Product" style="cursor: pointer;color:#ea580c;" (click)="editProduct(prod)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+        </div>
+
+    </div>
+</div>

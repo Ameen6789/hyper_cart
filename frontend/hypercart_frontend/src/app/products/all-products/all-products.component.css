@@ -1,0 +1,50 @@
+body,h1,h2,h3,h4,h5,h6 {
+  font-family: 'Outfit',  sans-serif !important;
+}
+.main-conatainer{    
+    margin-left: 130px;
+    margin-right: 130px;
+
+}
+
+
+.image-container{
+padding-left: 80px;
+padding-right: 80px;
+width: 50%;
+}
+.image-desc-conatiner{
+  display: flex;
+}
+.prod-image:hover{
+  transition: transform 0.3s ease;
+  transform: scale(1.08);
+  z-index: -999;
+}
+
+@media (max-width: 1024px) {
+  .main-conatainer {
+    margin: 0 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-conatainer {
+    margin: 0 30px;
+  }
+  .lower-about-section ul{
+    padding-left: 0;
+  }
+  .image-container{
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+.image-desc-conatiner{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+}

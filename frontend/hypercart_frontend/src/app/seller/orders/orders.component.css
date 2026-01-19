@@ -1,0 +1,60 @@
+
+body,h1,h2,h3,h4,h5,h6 {
+  font-family: 'Outfit',  sans-serif !important;
+}
+nav{
+    width: 250px;
+    border-right: 1px solid rgba(0, 0, 0, 0.134);
+    height: 100vh;
+}
+
+nav li{
+list-style-type: none;
+}
+nav li a {
+    text-decoration: none;
+    color: #374151;
+    font-weight: 400;
+
+}
+nav li a:not(.active):hover{
+    background-color: rgba(240, 248, 255, 0.678);
+    cursor: pointer;
+}
+
+nav li i {
+    font-size: 28px;
+    margin-right: 10px;
+    color: black;
+
+}
+nav li a {
+    width: 100%;
+}
+/* nav li a:active {
+    border-right: 1px solid rgb(255, 119, 0);
+    background-color:rgba(255, 119, 0, 0.336); ;
+
+} */
+
+nav .hide-text{
+    display: none;
+    flex-direction: unset;
+}
+
+.active {
+    background-color: #EA580C1A;
+    border-right: 3px solid rgb(255, 119, 0);
+
+}
+@media(max-width:768px){
+    nav{
+        width: fit-content;
+        border-right: 1px solid rgba(0, 0, 0, 0.134);
+
+    }
+    nav li i {
+    margin-right: 0px;
+
+}
+}

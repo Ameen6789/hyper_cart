@@ -1,0 +1,128 @@
+<div class="main-container">
+    <div class="d-flex align-items-center">
+        <h3 class="logo mb-0 fw-bold" routerLink="/"><span class="logo-first-letter ">H</span>yperCart</h3>
+       <span><i class="fa-solid fa-bars  ms-3 nav-button" (click)="toggleMenu()"></i></span> 
+
+    </div>
+
+    <div>
+        <nav class="main-nav">
+            <ul class="d-flex align-items-center justify-content-center mb-0 pb-0">
+                <li class="me-3" routerLink="/products/home">  
+                  <a routerLink="/products/home">Home</a>
+                </li>
+                <li class="me-3" routerLink="/products/all_products" style="cursor: pointer;">Shop</li>
+                <li class="me-3" (click)="navigate()" style="cursor: pointer;">About Us</li>
+                <li class="me-3" routerLink="/seller/listproduct" style="cursor: pointer;" *ngIf="userType == 'ADMIN'">Seller Dashboard</li>
+
+            </ul>
+
+        </nav>
+        
+    </div>
+
+
+    
+    
+
+
+    <!--  -->
+    <div class="d-flex align-items-center justify-content-end" style="position: relative;">
+            <i class="fa fa-search me-3 " style="cursor: pointer;" (click)="openModal(content)"></i>
+            <img src="assets/images/car.jpg"    class="profile-pic cursor-pointer" (click)="showModal=!showModal" *ngIf="isLoggedIn$">
+            <p class="mb-0 pb-0" style="cursor: pointer;" routerLink="login" *ngIf="!isLoggedIn$"><i class="fa fa-user"></i> Login</p> 
+          <div style="position: absolute;z-index: 999;top: 30px;right:30px;background-color: rgba(255, 255, 255, 0.993);box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);" *ngIf="showModal" class="profile-modal p-0 rounded-3" >
+            <div class="  w-100 px-0">
+              <div class=" d-flex align-items-center justify-content-start w-100 p-3" style="border-bottom: 1px solid rgba(121, 120, 120, 0.126);">
+                <img src="assets/images/car.jpg"  class="profile-pic cursor-pointer" >
+                <div class="ms-3" style="font-size: 13px;">
+                  <p class="mb-0 pb-0 fw-semibold" style="line-height: 15px;">{{email}} sdfdasfsd</p>
+                  <p class="mb-0 pb-0" style="line-height: 15px;">{{fullName}} </p>
+                </div>
+              </div>
+              <!-- <hr class="" style="color: gray;"> -->
+              <div class="col-12 d-flex align-items-center justify-content-start profile-modal-options p-3" style="border-bottom: 1px solid rgba(121, 120, 120, 0.126);" (click)="showModal=!showModal" routerLink="/orders/cart">
+                <i class="fa-solid fa-cart-shopping" style="font-size: 20px;"></i>
+                <div class="ms-3" style="font-size: 13px;">
+                  <p class="mb-0 pb-0 fw-semibold" style="line-height: 15px;"> Cart</p>
+                </div>
+              </div>
+              <!-- <hr class="" style="color: gray;"> -->
+                <div class="col-12 d-flex align-items-center justify-content-start profile-modal-options p-3" style="border-bottom: 1px solid rgba(121, 120, 120, 0.126);" (click)="showModal=!showModal" routerLink="/orders/myorders">
+                <i class="fa-solid fa-bag-shopping" style="font-size: 20px;"></i>
+                <div class="ms-3" style="font-size: 13px;">
+                  <p class="mb-0 pb-0 fw-semibold" style="line-height: 15px;">My Orders</p>
+                </div>
+              </div>
+              <!-- <hr class="" style="color: gray;"> -->
+
+              <div class="col-12 d-flex align-items-center justify-content-start profile-modal-options p-3" style="border-bottom: 1px solid rgba(121, 120, 120, 0.126);" routerLink="/change-password">
+                <i class="fa-solid fa-key" style="font-size: 20px;"></i>
+                <div class="ms-3" style="font-size: 13px;">
+                  <p class="mb-0 pb-0 fw-semibold" style="line-height: 15px;">Change Password</p>
+
+                </div>
+              </div>
+              <!-- <hr class="" style="color: gray;"> -->
+              <div class="col-12 d-flex align-items-center justify-content-start profile-modal-options p-3" style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" (click)="logoutUser()">
+                <i class="fas fa-sign-out" style="font-size: 20px;"></i>
+                <div class="ms-3" style="font-size: 13px;">
+                  <p class="mb-0 pb-0 fw-semibold" style="line-height: 15px;" >Sign Out </p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <!--  -->
+    <ng-template #content let-modal>
+  <div class="modal-header">
+    <div class="">
+        <h5 class="">Product Search</h5>
+
+    </div>
+    <br>
+
+  </div>
+
+  <div class="modal-body">
+    <div  class="w-100 d-flex search-input-container rounded-2">
+        <input type="text" placeholder="Search Product" name="" id="" class="w-100 border-0 rounded-2 search-input ps-3" [(ngModel)]="searchTerm" (input)="searchProducts()"><button class="btn border-0" style="background-color:rgb(107 114 128/.1)"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="mt-4 rounded-2 w-100" style="       border: 1px solid gray;
+        max-height: 60vh;          /* REQUIRED */
+       overflow-y: auto;           /* REQUIRED */
+       overflow-x: hidden;
+       scrollbar-width: thin;" *ngIf="lstProducts && lstProducts.length>0">
+      <div style="background-color:#E6E9F2;display: flex;overflow: hidden;" class="rounded-0 mb-2" >
+        <h3 class="fs-6 m-0 ms-3 my-2 fw-semibold"><i class="fa fa-search" ></i> Shop and Explore products from hypercart</h3>
+      </div>
+      <div style="background-color:white;display: flex;width:100%;cursor: pointer;" class="rounded-2" *ngFor="let prod of lstProducts" (click)="viewProduct(prod['id'])">
+        <h3 class="fs-6 m-0 ps-3 my-0 w-100 search-result-text" ><i class="fa fa-search"></i>{{prod['vchr_name']}}</h3>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close()">Close</button>
+  </div>
+</ng-template>
+</div>
+
+<!-- mobile nav -->
+        <nav class="mobile-nav w-100 h-100 pt-5"  id="mobileNav" style="background-color: #e6e9f28c;">
+            <ul class="d-flex flex-column align-items-center justify-content-center mb-0 pb-0 w-100 px-0" >
+                <li class=" text-center mb-3 w-100 py-0" routerLink="/products/home">  <a routerLink="/products/home" class="w-100 py-1" (click)="navItemClicked()">Home</a></li>
+                <li class=" text-center mb-3 w-100 py-0"><a routerLink="/products/all_products" class="w-100 py-1" (click)="navItemClicked()">Shop</a></li>
+                <li class=" text-center mb-3 w-100 py-0"><a routerLink="" class="w-100 py-1" (click)="navItemClicked()">About Us</a></li>
+                <!-- <li class=" text-center mb-3 w-100 py-0"><a routerLink="/products/home" class="w-100" (click)="navItemClicked()">Contact</a></li> -->
+                <li class=" text-center w-100 py-0"><a routerLink="/products/home" class="w-100 py-1" (click)="navItemClicked()" *ngIf="userType == 'ADMIN'">Seller Dashboard</a></li>
+
+            </ul>
+
+        </nav>
+        
+    <!-- </div> -->
+<!-- mobile nav -->
