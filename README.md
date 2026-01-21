@@ -1,8 +1,33 @@
 # Hyper Cart – Full Stack Application
 
-This repository contains the **full-stack implementation** of **Hyper Cart**, an e-commerce platform built with a **Django (Backend API)** and a **modern Frontend framework** (Angular / React).
+This repository contains the **full-stack implementation** of **Hyper Cart**, an e-commerce platform built with a **Django (Backend API)** and a **Angular Frontend framework**.
 
 Both **backend and frontend live in the same repository** for easier development, versioning, and deployment.
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Product Listings
+![Product Listings](screenshots/shop.png)
+
+### View Product
+![View Product](screenshots/view_product.png)
+
+### Cart
+![Cart](screenshots/cart.png)
+
+### Orders
+![Orders](screenshots/orders.png)
+
+### Add Product
+![Add Product](screenshots/addproduct.png)
+
+### All Products List
+![All Products List](screenshots/product_list.png)
+
+### All Orders
+![All Orders](screenshots/all_orders.png)
+
 
 ---
 
@@ -18,7 +43,7 @@ Both **backend and frontend live in the same repository** for easier development
 
 ### Frontend
 
-* **Angular / React** (SPA)
+* **Angular** (SPA)
 * **TypeScript / JavaScript**
 * **REST API Integration**
 * **Responsive UI**
@@ -33,17 +58,17 @@ hyper_cart/
 │   ├── manage.py
 │   ├── requirements.txt
 │   ├── .env
-│   ├── hyper_cart/.env
+│   ├── hyper_cart/
 │   │   ├── settings.py
 │   │   ├── urls.py
 │   │   ├── asgi.py
 │   │   └── wsgi.py
 │   └── apps/
-│       ├── users/
-│       ├── products/
-│       ├── cart/
 │       ├── orders/
-│       └── payments/
+│       ├── products/
+│       └── users/
+│       
+│       
 │
 │── frontend/
 │   ├── package.json
@@ -87,13 +112,12 @@ pip install -r requirements.txt
 Create a `.env` file in the backend directory:
 
 ```env
-SECRET_KEY=your-secret-key
-DEBUG=True
-DATABASE_NAME=hyper_cart
-DATABASE_USER=postgres
-DATABASE_PASSWORD=password
-DATABASE_HOST=localhost
-DATABASE_PORT=5432
+
+DB_NAME=hyper_cart
+DB_USER=postgres
+DB_PASSWORD=password
+EMAIL_HOST_USER = youremail@gmail.com
+EMAIL_HOST_PASSWORD = google app password
 ```
 
 ### 5️⃣ Database setup
@@ -171,29 +195,17 @@ Authorization: Bearer <access_token>
 
 ```bash
 # Backend terminal
-cd backend
+cd backend/hypercart_backend
 python manage.py runserver
 
 # Frontend terminal
-cd frontend
-npm start
+cd frontend/hypercart_frontend
+ng serve
 ```
 
 ---
 
-## 🚦 Git Workflow
 
-* `main` → stable branch
-* `feature/*` → new features
-
-```bash
-git checkout -b feature/cart-module
-git push origin feature/cart-module
-```
-
-> ⚠️ Double confirmation is enabled before push to avoid accidental updates.
-
----
 
 ## 🔒 Security Best Practices
 
@@ -211,13 +223,4 @@ git push origin feature/cart-module
 
 ---
 
-## 👨‍💻 Author
 
-**Ameen C A**
-Full Stack Developer
-
----
-
-## 📄 License
-
-MIT License
