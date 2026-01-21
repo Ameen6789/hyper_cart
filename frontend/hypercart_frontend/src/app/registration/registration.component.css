@@ -1,5 +1,7 @@
 body{
     height: 100vh;
+    background-image: url('/assets/images/login-bg.jpg');
+
 }
 .form-control:focus{
     outline: 1 px solid rgba(0, 0, 0, 0.452);

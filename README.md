@@ -1,12 +1,13 @@
-# Hyper Cart – Full Stack Application
+# HyperCart – Full Stack Application
 
-This repository contains the **full-stack implementation** of **Hyper Cart**, an e-commerce platform built with a **Django (Backend API)** and a **Angular Frontend framework**.
-
-Both **backend and frontend live in the same repository** for easier development, versioning, and deployment.
+HyperCart is a fast and modern full-stack e-commerce web application built to make online shopping smooth and enjoyable. It offers intuitive product browsing, smart cart handling, secure and hassle-free checkout, and a clean, responsive interface, all designed with performance, scalability, and user experience in mind.
 
 ### Home Page
 ![Home Page](screenshots/home.png)
 
+
+### Login Page
+![Login Page](screenshots/login_page.png)
 
 
 ### Product Listings
