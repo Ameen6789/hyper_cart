@@ -7,23 +7,35 @@ Both **backend and frontend live in the same repository** for easier development
 ### Home Page
 ![Home Page](screenshots/home.png)
 
+
+
 ### Product Listings
 ![Product Listings](screenshots/shop.png)
+
+
 
 ### View Product
 ![View Product](screenshots/view_product.png)
 
+
+
 ### Cart
 ![Cart](screenshots/cart.png)
 
+
+
 ### Orders
-![Orders](screenshots/orders.png)
+![Orders](screenshots/myorders.png)
 
 ### Add Product
 ![Add Product](screenshots/addproduct.png)
 
+
+
 ### All Products List
 ![All Products List](screenshots/product_list.png)
+
+
 
 ### All Orders
 ![All Orders](screenshots/all_orders.png)
