@@ -93,6 +93,11 @@ hyper_cart/
 ```
 
 ---
+## Clone Repo
+
+```bash
+git clone https://github.com/Ameen6789/hyper_cart.git
+```
 
 ## ⚙️ Backend Setup (Django)
 
