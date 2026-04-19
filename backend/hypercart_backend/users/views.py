@@ -66,7 +66,6 @@ class LoginApi(APIView):
             return Response({'status': 0, 'message': 'Email and password required'})
         
         user = authenticate(username=email,password=password)
-        login
 
         if not user:
             return Response({'status': 0, 'message': 'Invalid credentials'})
