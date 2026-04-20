@@ -3,7 +3,8 @@ import { FormsModule } from '@angular/forms';
 import Toastify from 'toastify-js';
 import { ServerService } from '../../server.service';
 import { Router } from '@angular/router';
-
+import { environment } from '../../../environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class EditProductComponent implements OnInit{
 
-constructor(private serverService:ServerService,private router:Router){}
+constructor(private serverService:ServerService,private router:Router,private spinnerService:NgxSpinnerService){}
 @HostListener('window:resize',)
 onResize() {
   if (window.innerWidth > 768) {
@@ -49,16 +50,18 @@ hostname:string=''
 ngOnInit(): void {
   this.getCategory()
   this.getData()
-  this.hostname=this.serverService.hostname.slice(0,-1)
+  this.hostname=environment.production==true?'':this.serverService.hostname.slice(0,-1)
 
 }
 getCategory(){
+  this.spinnerService.show()
   this.serverService.getData('products/list_category').subscribe((res:any)=>{
+    this.spinnerService.hide()
     if (res['status']==1){
       this.lstCategory=res['lstData']
     }
   },(err:any)=>{
-
+    this.spinnerService.hide()
   })
 
 }
@@ -67,7 +70,9 @@ getCategory(){
 getData(){
   this.intProductId=localStorage.getItem('productId') || ''
   let dct_data={'intProductId':Number(this.intProductId)}
+  this.spinnerService.show()
   this.serverService.putData('products/add_product',dct_data).subscribe((res:any)=>{
+    this.spinnerService.hide()
     if (res['status']==1){
       this.dctProductData=res['data']
       this.strProduct=this.dctProductData['vchr_name']
@@ -123,13 +128,13 @@ getData(){
       console.log(this.selectedCategory)
     }
   },(err:any)=>{
-
+    this.spinnerService.hide()
   })
 
 }
 
 updateProduct(){
-  console.log(this.image1)
+
   if (!this.imageFile1 && !this.imageFile2 && !this.imageFile3 && !this.imageFile4){
     this.strErrorText='Add Atleast One Image'
     this.showToast()
@@ -188,8 +193,11 @@ updateProduct(){
   formData.append('intStock',String(this.intStock))
   formData.append('intProductPrice',String(this.intProductPrice))
   formData.append('intOfferPrice',String(this.intOfferPrice))
+  this.spinnerService.show()
+
   this.serverService.patchData('products/add_product',formData).subscribe(
     (res:any)=>{
+      this.spinnerService.hide()
       if (res['status']==1){
         this.showToastSuccess()
         this.router.navigate(['/seller/listproduct'])
@@ -200,6 +208,7 @@ updateProduct(){
       }
     },
     (err:any)=>{
+      this.spinnerService.hide()
       this.strErrorText='Error Occured'
       this.showToast()
     }

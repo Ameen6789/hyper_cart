@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Toastify from 'toastify-js';
 import { ServerService } from '../../server.service';
+import { environment } from '../../../environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +12,7 @@ import { ServerService } from '../../server.service';
 })
 export class CartComponent implements  OnInit{
 
-  constructor(private router:Router,private serverService:ServerService){}
+  constructor(private router:Router,private serverService:ServerService,private spinnerService:NgxSpinnerService){}
   hostname=''
   lstData:any=[]
   strErrorText:string=''
@@ -19,7 +21,7 @@ export class CartComponent implements  OnInit{
   lstAddress=[]
   AddressId:any
   ngOnInit(): void {
-    this.hostname=this.serverService.hostname.slice(0,-1)
+    this.hostname=environment.production==true?'':this.serverService.hostname.slice(0,-1)
     this.getData()
     this.getAddress()
   }
@@ -55,8 +57,10 @@ showToast() {
   }).showToast();
 }
 getData(){
+     this.spinnerService.show()
      this.serverService.postData('orders/get_cart_items',{}).subscribe(
       (res)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
           this.lstData=res['lst_data']
           for (let data of this.lstData){
@@ -71,6 +75,7 @@ getData(){
         }
       },
       (err)=>{
+          this.spinnerService.hide()
           this.strErrorText='Error Occured!'
           this.showErrorToast()
       }
@@ -164,8 +169,10 @@ changeQty(status:number,data:any){
     }
 
     getAddress(){
+      this.spinnerService.show()
       this.serverService.getData('orders/add_address').subscribe(
       (res)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
 
           this.lstAddress=res['lst_data']
@@ -179,6 +186,7 @@ changeQty(status:number,data:any){
         }
       },
       (err)=>{
+          this.spinnerService.hide()
           this.strErrorText='Error Occured!'
           this.showErrorToast()
       }
@@ -199,8 +207,10 @@ changeQty(status:number,data:any){
         dctData['lstItemData']=this.lstData
         dctData['intAddressId']=this.AddressId
         dctData['dblTotalAmount']=this.dblPrice
-          this.serverService.postData('orders/add_order',dctData).subscribe(
+        this.spinnerService.show()
+        this.serverService.postData('orders/add_order',dctData).subscribe(
       (res)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
 
           this.showToast()
@@ -212,6 +222,7 @@ changeQty(status:number,data:any){
         }
       },
       (err)=>{
+          this.spinnerService.hide()
           this.strErrorText='Error Occured!'
           this.showErrorToast()
       }

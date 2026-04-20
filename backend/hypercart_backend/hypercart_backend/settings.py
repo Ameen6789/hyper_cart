@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 from datetime import timedelta
 from dotenv import load_dotenv
-
+from django.core.files.storage import default_storage
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
@@ -188,5 +188,10 @@ AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL")
 
-AWS_S3_REGION_NAME = "ap-south-1"   # (or whatever Supabase region you created the project in)
-AWS_DEFAULT_ACL = None
+AWS_S3_REGION_NAME = "ap-south-1"
+AWS_S3_FILE_OVERWRITE = False   # (or whatever Supabase region you created the project in)
+AWS_DEFAULT_ACL = os.getenv('AWS_S3_REGION_NAME')
+AWS_QUERYSTRING_AUTH = False  # ✅ Removes signed/expiring params from URL
+
+# ✅ Force the public-facing URL format for Supabase
+AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN')

@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServerService } from '../../server.service';
 import Toastify from 'toastify-js'
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-orders',
@@ -23,7 +24,7 @@ onResize() {
     .forEach(nav => nav.classList.add('hide-text'));
   }
 }
-      constructor(private router:Router,private serverService:ServerService){}
+      constructor(private router:Router,private serverService:ServerService,private spinnerService:NgxSpinnerService){}
 
       lstData=[]
       strErrorText=''
@@ -32,8 +33,10 @@ onResize() {
         this.getData()
       }
       getData(){
+      this.spinnerService.show()
       this.serverService.postData('orders/get_orders',{}).subscribe(
       (res)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
 
           this.lstData=res['lst_data']
@@ -45,6 +48,7 @@ onResize() {
         }
       },
       (err)=>{
+          this.spinnerService.hide()
           this.strErrorText='Error Occured!'
           this.showErrorToast()
       }

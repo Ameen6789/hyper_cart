@@ -6,15 +6,16 @@ import { ServerService } from '../server.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf,NgxSpinnerModule],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })
 export class ForgotPasswordComponent {
- constructor(private serverService:ServerService,private router:Router,private auth:AuthService){}
+ constructor(private serverService:ServerService,private router:Router,private auth:AuthService,private spinnerService:NgxSpinnerService){}
   blnShowPassword=false
 
   strEmail=''
@@ -48,9 +49,10 @@ export class ForgotPasswordComponent {
 
     let dct_data:any={}
     dct_data['strEmail']=this.strEmail
-
+    this.spinnerService.show()
     this.serverService.postData('users/forgot_password',dct_data).subscribe(
       (res:any)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
 
         this.ShowError=false
@@ -72,6 +74,7 @@ export class ForgotPasswordComponent {
         }
       },
       (error)=>{
+          this.spinnerService.hide()
           this.strErrorText='Error Occured'
           this.showToast()
       }

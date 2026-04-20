@@ -5,15 +5,16 @@ import { ServerService } from '../server.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-reset-password-otp',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,NgxSpinnerModule],
   templateUrl: './reset-password-otp.component.html',
   styleUrl: './reset-password-otp.component.css'
 })
 export class ResetPasswordOtpComponent implements OnInit{
-constructor(private serverService:ServerService,private router:Router,private auth:AuthService){}
+constructor(private serverService:ServerService,private router:Router,private auth:AuthService,private spinnerService:NgxSpinnerService){}
   blnShowPassword=false
 
   strEmail=''
@@ -38,9 +39,10 @@ constructor(private serverService:ServerService,private router:Router,private au
     let dct_data:any={}
     dct_data['strEmail']=this.strEmail
     dct_data['strOtp']=this.strOtp
-
+    this.spinnerService.show()
     this.serverService.putData('users/forgot_password',dct_data).subscribe(
       (res:any)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
 
           this.router.navigate(['/reset-password'])
@@ -59,6 +61,7 @@ constructor(private serverService:ServerService,private router:Router,private au
         }
       },
       (err)=>{
+          this.spinnerService.hide()
           this.strErrorText='Error Occured'
           this.showToast()
       }
@@ -124,9 +127,10 @@ constructor(private serverService:ServerService,private router:Router,private au
 
     let dct_data:any={}
     dct_data['strEmail']=this.strEmail
-
+    this.spinnerService.show()
     this.serverService.postData('users/forgot_password',dct_data).subscribe(
       (res:any)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
 
         this.ShowError=false
@@ -151,6 +155,7 @@ constructor(private serverService:ServerService,private router:Router,private au
         }
       },
       (error)=>{
+          this.spinnerService.hide()
           this.strErrorText='Error Occured'
           this.showToast()
       }

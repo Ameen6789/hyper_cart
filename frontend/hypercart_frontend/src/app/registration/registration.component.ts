@@ -4,15 +4,16 @@ import { FormsModule } from '@angular/forms';
 import Toastify from 'toastify-js'
 import { ServerService } from '../server.service';
 import {  Router } from '@angular/router';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,NgxSpinnerModule],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css'
 })
 export class RegistrationComponent {
-  constructor(private serverService:ServerService,private router:Router){}
+  constructor(private serverService:ServerService,private router:Router,private spinnerService:NgxSpinnerService){}
   blnShowPassword1=false
   blnShowPassword2=false
   strErrorText=''
@@ -92,9 +93,10 @@ export class RegistrationComponent {
     dct_data['email']=this.strEmail
     dct_data['password']=this.strPassword
 
-    
+    this.spinnerService.show()
     this.serverService.postData('users/login_api/',dct_data).subscribe(
       (res:any)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
           this.showToastSuccess()
           this.router.navigate(['login'])
@@ -104,8 +106,8 @@ export class RegistrationComponent {
           this.showToast()
         }
       },
-      ()=>{
-
+      (error:any)=>{
+        this.spinnerService.hide()
       }
     )
   }

@@ -6,15 +6,16 @@ import { ServerService } from '../server.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-change-password',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,NgxSpinnerModule],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.css'
 })
 export class ChangePasswordComponent implements OnInit{
-constructor(private serverService:ServerService,private router:Router,private auth:AuthService){}
+constructor(private serverService:ServerService,private router:Router,private auth:AuthService,private spinnerService:NgxSpinnerService){}
   blnShowPassword=false
   blnShowPassword2=false
   blnShowPassword3=false 
@@ -62,17 +63,13 @@ constructor(private serverService:ServerService,private router:Router,private au
     dct_data['userid']=this.userId
     dct_data['password']=this.strCurrentPassword
     dct_data['newPassword']=this.strNewPassword
-
+    this.spinnerService.show()
     this.serverService.postData('users/change_password',dct_data).subscribe(
       (res:any)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
           this.showToastSuccess()
-          // localStorage.setItem('access_token',res['data']['access'])
-          // localStorage.setItem('refresh',res['data']['refresh'])
-          // localStorage.setItem('user_type',res['data']['user_type'])
-          // localStorage.setItem('user_id',res['data']['user_id'])
-          // localStorage.setItem('full_name',res['data']['name'])
-          // this.auth.loginSuccess(res['data']['access'], res['data']['refresh']); // 🔥 REQUIRED
+
           this.auth.logout()
           this.router.navigate(['/login'])
         }
@@ -84,6 +81,7 @@ constructor(private serverService:ServerService,private router:Router,private au
         }
       },
       (err:any)=>{
+        this.spinnerService.hide()
           this.strErrorText='Error Occured'
           this.showToast()
       }

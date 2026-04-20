@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit{
 onResize() {
   if (window.innerWidth > 700) {
     document?.getElementById('mobileNav')?.classList.remove('open');
+    document.body.style.overflow = '';
 
   }
 }
@@ -68,13 +69,23 @@ ngOnInit(): void {
 }
 
 toggleMenu() {
-    document?.getElementById('mobileNav')?.classList.toggle('open');
-    document.body.classList.add("no-scroll");
+  const nav = document.getElementById('mobileNav');
+  const isOpen = nav?.classList.toggle('open');
+
+  // classList.toggle returns true if class was ADDED, false if REMOVED
+  if (isOpen) {
+    document.body.style.overflow = 'hidden';
+
+  } else {
+    document.body.style.overflow = '';
+
+  }
   
   }
 
   navItemClicked(){
     document?.getElementById('mobileNav')?.classList.toggle('open');
+    document.body.style.overflow = '';
 
   }
   openProfileModal(){

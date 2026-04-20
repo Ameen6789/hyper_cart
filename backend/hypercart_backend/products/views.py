@@ -9,7 +9,7 @@ from datetime import datetime
 from django.db import transaction
 from django.conf import settings
 from django.core.files.uploadedfile import UploadedFile
-
+from django.core.files.storage import default_storage
 class ListCategory(APIView):
     def get(self,request):
         try:
@@ -43,50 +43,18 @@ class AddProduct(APIView):
                     int_status=1
                 )
                 lst_images=[]
-                file_upload_dir=os.path.join(settings.MEDIA_ROOT,'ProductImages')
-                os.makedirs(file_upload_dir,exist_ok=True)
-                if request.data.get('image1'):
-                    uploaded_file = request.FILES.get('image1')
-                    fs=FileSystemStorage(
-                        location=file_upload_dir,
-                        base_url=settings.MEDIA_URL + 'ProductImages/'
-                    )
-                    filename=fs.save(uploaded_file.name,uploaded_file)
-                    file_url=fs.url(filename)
-                    if file_url:
+                for key in ['image1', 'image2', 'image3', 'image4']:
+                    file = request.FILES.get(key)
+                    if file:
+                        # Save temporarily in model field or directly upload
+                        ins_product_image = file
+                        ins_product_image.name = f'ProductImages/{file.name}'
+
+                        # If you're NOT using model ImageField, upload manually via model
+                        saved_file = default_storage.save(ins_product_image.name, ins_product_image)
+                        file_url = default_storage.url(saved_file)
+
                         lst_images.append(file_url)
-
-                if request.data.get('image2'):
-                    uploaded_file=request.FILES.get('image2')
-                    fs=FileSystemStorage(
-                        location=file_upload_dir,
-                        base_url=settings.MEDIA_URL + 'ProductImages/'
-                    )
-                    filename=fs.save(uploaded_file.name,uploaded_file)
-                    file_url2=fs.url(filename)
-                    if file_url2:
-                        lst_images.append(file_url2)
-
-                if request.data.get('image3'):
-                    uploaded_file=request.FILES.get('image3')
-                    fs=FileSystemStorage(
-                        location=file_upload_dir,
-                        base_url=settings.MEDIA_URL + 'ProductImages/'
-                    )
-                    filename=fs.save(uploaded_file.name,uploaded_file)
-                    file_url3=fs.url(filename)
-                    if file_url3:
-                        lst_images.append(file_url3)
-                if request.data.get('image4'):
-                    uploaded_file=request.FILES.get('image4')
-                    fs=FileSystemStorage(
-                        location=file_upload_dir,
-                        base_url=settings.MEDIA_URL + 'ProductImages/'
-                    )
-                    file_name=fs.save(uploaded_file.name,uploaded_file)
-                    file_url4=fs.url(file_name)
-                    if file_url4:
-                        lst_images.append(file_url4)
                 if lst_images:
                     ins_product.jsn_images=lst_images
                 ins_product.save()
@@ -125,65 +93,25 @@ class AddProduct(APIView):
                     ins_product.dat_updated=datetime.now()
 
                     lst_images=[]
-                    file_upload_dir=os.path.join(settings.MEDIA_ROOT,'ProductImages')
-                    os.makedirs(file_upload_dir,exist_ok=True)
-                    if request.data.get('image1'):
-                        if isinstance(request.data.get('image1'), UploadedFile):
-                            uploaded_file = request.FILES.get('image1')
-                            fs=FileSystemStorage(
-                                location=file_upload_dir,
-                                base_url=settings.MEDIA_URL + 'ProductImages/'
-                            )
-                            filename=fs.save(uploaded_file.name,uploaded_file)
-                            file_url=fs.url(filename)
-                        else:
-                           file_url=request.data.get('image1')
+                    for key in ['image1', 'image2', 'image3', 'image4']:
+                        value = request.data.get(key)
 
-                        if file_url:
-                            lst_images.append(file_url)
+                        if value:
+                            # ✅ New upload
+                            if isinstance(value, UploadedFile):
+                                file = request.FILES.get(key)
 
-                    if request.data.get('image2'):
-                        if isinstance(request.data.get('image2'), UploadedFile):
-                            uploaded_file=request.FILES.get('image2')
-                            fs=FileSystemStorage(
-                                location=file_upload_dir,
-                                base_url=settings.MEDIA_URL + 'ProductImages/'
-                            )
-                            filename=fs.save(uploaded_file.name,uploaded_file)
-                            file_url2=fs.url(filename)
-                        else:
-                            file_url2=request.data.get('image2')
-                        if file_url2:
-                            lst_images.append(file_url2)
+                                filename = f'ProductImages/{file.name}'
+                                saved_path = default_storage.save(filename, file)
 
-                    if request.data.get('image3'):
-                        if isinstance(request.data.get('image3'),UploadedFile):
-                            uploaded_file=request.FILES.get('image3')
-                            fs=FileSystemStorage(
-                                location=file_upload_dir,
-                                base_url=settings.MEDIA_URL + 'ProductImages/'
-                            )
-                            filename=fs.save(uploaded_file.name,uploaded_file)
-                            file_url3=fs.url(filename)
-                        else:
-                            file_url3=request.data.get('image3')
+                                file_url = default_storage.url(saved_path)
 
-                        if file_url3:
-                            lst_images.append(file_url3)
-                    if request.data.get('image4'):
-                        if isinstance(request.data.get('image4'),UploadedFile):
-                            uploaded_file=request.FILES.get('image4')
-                            fs=FileSystemStorage(
-                                location=file_upload_dir,
-                                base_url=settings.MEDIA_URL + 'ProductImages/'
-                            )
-                            file_name=fs.save(uploaded_file.name,uploaded_file)
-                            file_url4=fs.url(file_name)
-                        else:
-                            file_url4=request.data.get('image4')
+                            # ✅ Existing URL
+                            else:
+                                file_url = value
 
-                        if file_url4:
-                            lst_images.append(file_url4)
+                            if file_url:
+                                lst_images.append(file_url)
                     if lst_images:
                         ins_product.jsn_images=lst_images
                     ins_product.save()

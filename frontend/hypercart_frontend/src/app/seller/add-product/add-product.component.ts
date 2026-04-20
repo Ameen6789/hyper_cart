@@ -3,7 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import Toastify from 'toastify-js';
 import { ServerService } from '../../server.service';
 import { Router } from '@angular/router';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AddProductComponent implements OnInit{
 
-constructor(private serverService:ServerService,private router:Router){}
+constructor(private serverService:ServerService,private router:Router,private spinnerService:NgxSpinnerService){}
 @HostListener('window:resize',)
 onResize() {
   if (window.innerWidth > 768) {
@@ -46,19 +46,21 @@ ngOnInit(): void {
   this.getCategory()
 }
 getCategory(){
+  this.spinnerService.show()
   this.serverService.getData('products/list_category').subscribe((res)=>{
+    this.spinnerService.hide()
     if (res['status']==1){
       this.lstCategory=res['lstData']
       console.log(res['lstData'])
     }
   },(err)=>{
-
+    this.spinnerService.hide()
   })
 
 }
 
 addProduct(){
-  console.log(this.image1)
+
   if (!this.imageFile1 && !this.imageFile2 && !this.imageFile3 && !this.imageFile4){
     this.strErrorText='Add Atleast One Image'
     this.showToast()
@@ -116,8 +118,10 @@ addProduct(){
   formData.append('intStock',String(this.intStock))
   formData.append('intProductPrice',String(this.intProductPrice))
   formData.append('intOfferPrice',String(this.intOfferPrice))
+  this.spinnerService.show()
   this.serverService.postData('products/add_product',formData).subscribe(
     (res)=>{
+      this.spinnerService.hide()
       if (res['status']==1){
         this.showToastSuccess()
         this.router.navigate(['/seller/listproduct'])
@@ -131,6 +135,7 @@ addProduct(){
     (err)=>{
       this.strErrorText='Error Occured'
       this.showToast()
+      this.spinnerService.hide()
     }
   )
 

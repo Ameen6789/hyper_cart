@@ -24,6 +24,7 @@
     "@hyahfoufi/ng-snotify": "^18.0.0",
     "@ng-bootstrap/ng-bootstrap": "^17.0.1",
     "bootstrap": "^5.3.8",
+    "ngx-spinner": "^18.0.0",
     "ngx-toastr": "^19.1.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.26.17",

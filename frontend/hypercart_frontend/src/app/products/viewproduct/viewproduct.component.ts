@@ -3,6 +3,9 @@ import Toastify from 'toastify-js';
 import { ServerService } from '../../server.service';
 import { Route, Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { environment } from '../../../environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-viewproduct',
@@ -10,7 +13,7 @@ import { AuthService } from '../../auth.service';
   styleUrl: './viewproduct.component.css'
 })
 export class ViewproductComponent implements OnInit{
-constructor(private serverService:ServerService,private router:Router,private auth:AuthService){}
+constructor(private serverService:ServerService,private router:Router,private auth:AuthService,private spinnerService:NgxSpinnerService){}
   intProductId:any
   dctData:any={}
   hostname=''
@@ -19,7 +22,7 @@ constructor(private serverService:ServerService,private router:Router,private au
   isLoggedIn$:any
   ngOnInit(): void {
     this.intProductId=localStorage.getItem('productId') || ''
-    this.hostname=this.serverService.hostname.slice(0,-1)
+    this.hostname=environment.production==true?'':this.serverService.hostname.slice(0,-1)
     this.auth.isLoggedIn$.subscribe(value => {
     this.isLoggedIn$ = value;
     })
@@ -75,10 +78,12 @@ showToast() {
   }).showToast();
 }
 getData(){
+    this.spinnerService.show()
     this.intProductId=localStorage.getItem('productId') || ''
     let dct_data={'intProductId':Number(this.intProductId)}
     this.serverService.postData('products/list_product',dct_data).subscribe(
       (res)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
           this.dctData=res['data']
           this.lstData=res['lstData']
@@ -90,7 +95,7 @@ getData(){
         }
       },
       (err)=>{
-
+        this.spinnerService.hide()
       }
     )
 

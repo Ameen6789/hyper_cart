@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServerService } from '../../server.service';
+import { environment } from '../../../environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-list-product',
@@ -8,7 +10,7 @@ import { ServerService } from '../../server.service';
   styleUrl: './list-product.component.css'
 })
 export class ListProductComponent implements OnInit{
-  constructor(private router:Router,private serverService:ServerService){}
+  constructor(private router:Router,private serverService:ServerService,private spinnerService:NgxSpinnerService){}
   lstProducts=[]
   hostname=''
   @HostListener('window:resize',)
@@ -25,7 +27,7 @@ onResize() {
 }
 ngOnInit(): void {
   this.listProduct()
-  this.hostname=this.serverService.hostname.slice(0,-1)
+  this.hostname=environment.production==true?'':this.serverService.hostname.slice(0,-1)
 }
 
 viewProduct(product:any){
@@ -38,8 +40,10 @@ editProduct(product:any){
 
 }
 listProduct(){
+  this.spinnerService.show()
   this.serverService.getData('products/list_product').subscribe(
     (res)=>{
+      this.spinnerService.hide()
       if (res['status']==1){
         this.lstProducts=res['lstData']
       }
@@ -48,7 +52,7 @@ listProduct(){
       }
     },
     (err)=>{
-
+      this.spinnerService.hide()
     }
   )
 }

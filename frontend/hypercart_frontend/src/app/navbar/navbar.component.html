@@ -1,7 +1,8 @@
 <div class="main-container">
     <div class="d-flex align-items-center">
+        <span><i class="fa-solid fa-bars me-3 nav-button" (click)="toggleMenu()"></i></span> 
         <h3 class="logo mb-0 fw-bold" routerLink="/"><span class="logo-first-letter ">H</span>yperCart</h3>
-       <span><i class="fa-solid fa-bars  ms-3 nav-button" (click)="toggleMenu()"></i></span> 
+
 
     </div>
 
@@ -112,13 +113,13 @@
 </div>
 
 <!-- mobile nav -->
-        <nav class="mobile-nav w-100 h-100 pt-5"  id="mobileNav" style="background-color: #e6e9f28c;">
+        <nav class="mobile-nav w-100 h-100 pt-5"  id="mobileNav" style="background-color: #d3d8e5a6;">
             <ul class="d-flex flex-column align-items-center justify-content-center mb-0 pb-0 w-100 px-0" >
-                <li class=" text-center mb-3 w-100 py-0" routerLink="/products/home">  <a routerLink="/products/home" class="w-100 py-1" (click)="navItemClicked()">Home</a></li>
-                <li class=" text-center mb-3 w-100 py-0"><a routerLink="/products/all_products" class="w-100 py-1" (click)="navItemClicked()">Shop</a></li>
-                <li class=" text-center mb-3 w-100 py-0"><a routerLink="" class="w-100 py-1" (click)="navItemClicked()">About Us</a></li>
+                <li class=" text-center text-black mb-3 w-100 py-0" routerLink="/products/home">  <a routerLink="/products/home" class="w-100 py-1 text-black" (click)="navItemClicked()">Home</a></li>
+                <li class=" text-center text-black mb-3 w-100 py-0"><a routerLink="/products/all_products" class="w-100 py-1 text-black" (click)="navItemClicked()">Shop</a></li>
+                <li class=" text-center text-black mb-3 w-100 py-0"><a routerLink="" class="w-100 py-1 text-black" (click)="navItemClicked()">About Us</a></li>
                 <!-- <li class=" text-center mb-3 w-100 py-0"><a routerLink="/products/home" class="w-100" (click)="navItemClicked()">Contact</a></li> -->
-                <li class=" text-center w-100 py-0"><a routerLink="/products/home" class="w-100 py-1" (click)="navItemClicked()" *ngIf="userType == 'ADMIN'">Seller Dashboard</a></li>
+                <li class=" text-center text-black w-100 py-0"><a routerLink="/seller/listproduct" class="w-100 py-1 text-black" (click)="navItemClicked()" *ngIf="userType == 'ADMIN'">Seller Dashboard</a></li>
 
             </ul>
 

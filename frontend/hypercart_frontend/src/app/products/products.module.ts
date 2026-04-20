@@ -5,7 +5,8 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsHomeComponent } from './products-home/products-home.component';
 import { ViewproductComponent } from './viewproduct/viewproduct.component';
 import { AllProductsComponent } from './all-products/all-products.component';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxSpinnerModule } from "ngx-spinner"
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AllProductsComponent } from './all-products/all-products.component';
   imports: [
     CommonModule,
     ProductsRoutingModule,
+    NgxSpinnerModule,
   ]
 })
 export class ProductsModule { }

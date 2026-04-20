@@ -5,6 +5,7 @@ import { CartComponent } from './cart/cart.component';
 import { AddAddressComponent } from './add-address/add-address.component';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule
   ]
 })
 export class OrdersModule { }

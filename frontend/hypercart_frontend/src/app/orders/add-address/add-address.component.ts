@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServerService } from '../../server.service';
 import Toastify from 'toastify-js';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-add-address',
   templateUrl: './add-address.component.html',
   styleUrl: './add-address.component.css'
 })
 export class AddAddressComponent implements OnInit{
-  constructor(private router:Router,private serverService:ServerService){}
+  constructor(private router:Router,private serverService:ServerService,private spinnerService:NgxSpinnerService){}
   strName:string=''
   intMobile:any
   intPincode:any
@@ -21,7 +22,7 @@ export class AddAddressComponent implements OnInit{
   }
 
   saveAddress(){
-    console.log(this.strName,'sss')
+    
     if (!this.strName.trim()){
       this.strErrorText='Enter Name'
       this.showErrorToast()
@@ -71,8 +72,10 @@ export class AddAddressComponent implements OnInit{
     if (this.strName){
       dctData['strState']=this.strState.trim()
     }
+    this.spinnerService.show()
     this.serverService.postData('orders/add_address',dctData).subscribe(
       (res)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
           this.router.navigate(['/orders/cart'])
         }
@@ -82,6 +85,7 @@ export class AddAddressComponent implements OnInit{
         }
       },
       (err)=>{
+        this.spinnerService.hide()
         this.strErrorText='Error Occured!'
         this.showErrorToast()
       }

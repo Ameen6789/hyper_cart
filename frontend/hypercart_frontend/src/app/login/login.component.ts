@@ -6,15 +6,16 @@ import { ServerService } from '../server.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [OrdersRoutingModule,CommonModule,FormsModule],
+  imports: [OrdersRoutingModule,CommonModule,FormsModule,NgxSpinnerModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  constructor(private serverService:ServerService,private router:Router,private auth:AuthService){}
+  constructor(private serverService:ServerService,private router:Router,private auth:AuthService,private spinnerService:NgxSpinnerService){}
   blnShowPassword=false
 
   strEmail=''
@@ -51,9 +52,10 @@ export class LoginComponent {
     dct_data['email']=this.strEmail
     dct_data['password']=this.strPassword
 
-    
+    this.spinnerService.show()
     this.serverService.putData('users/login_api/',dct_data).subscribe(
       (res:any)=>{
+        this.spinnerService.hide()
         if (res['status']==1){
           this.showToastSuccess()
           localStorage.setItem('access_token',res['data']['access'])
@@ -69,17 +71,11 @@ export class LoginComponent {
           this.strErrorText=res['message']
           this.showToast()
 
-    //           "data": {
-    //     "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY3ODIyNTEyLCJpYXQiOjE3Njc4MTE3MTIsImp0aSI6IjI4NmNiZmZmNGEwODQ0ODliMDhlNGMxNWU0YTI2OWJlIiwidXNlcl9pZCI6IjEifQ.kAcMRIuHA2DAKE1w_J2POmMxNe6mPbslw__ZkqXb9s4",
-    //     "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2ODI0MzcxMiwiaWF0IjoxNzY3ODExNzEyLCJqdGkiOiI2NzVkYTkyZTI3ZjA0NGEyYmU5ZTg1ZjRlN2MzMTE5MCIsInVzZXJfaWQiOiIxIn0.pkPJMYP_7M-wzJqB0gKuSPr_U_JjdorbkFo9p2xyGjo",
-    //     "user_type": "CUSTOMER",
-    //     "user_id": 1,
-    //     "name": "Azarath Ameen C A"
-    // }
+
         }
       },
-      ()=>{
-
+      (error:any)=>{
+        this.spinnerService.hide()
       }
     )
   }

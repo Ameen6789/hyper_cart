@@ -96,7 +96,7 @@ class ChangePassword(APIView):
     # permission_classes=[IsAuthenticated]
     def post(self,request):
         try:
-            import pdb;pdb.set_trace()
+            
             user_id=request.data.get('userid')
             current_password=request.data.get('password')
             new_password=request.data.get('newPassword')
