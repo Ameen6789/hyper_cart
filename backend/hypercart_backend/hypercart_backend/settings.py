@@ -190,8 +190,8 @@ AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL")
 
 AWS_S3_REGION_NAME = "ap-south-1"
 AWS_S3_FILE_OVERWRITE = False   # (or whatever Supabase region you created the project in)
-AWS_DEFAULT_ACL = os.getenv('AWS_S3_REGION_NAME')
-AWS_QUERYSTRING_AUTH = False  # ✅ Removes signed/expiring params from URL
+AWS_DEFAULT_ACL = 'public-read'
+AWS_QUERYSTRING_AUTH = False  # Removes signed/expiring params from URL
 
-# ✅ Force the public-facing URL format for Supabase
+# Force the public-facing URL format for Supabase
 AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN')
