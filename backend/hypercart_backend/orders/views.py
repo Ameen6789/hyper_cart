@@ -174,10 +174,6 @@ class AddOrder(APIView):
                             ins_product.int_stock_qty=ins_product.int_stock_qty-data['int_qty']
                             ins_product.save()
 
-
-                        # .update(
-                        #     int_stock_qty=F('int_stock_qty') - data['int_qty']
-                        # )
                     ins_order.dbl_total_amt=dbl_total_amount
                     ins_order.save()
                     Cart.objects.filter(fk_user_id=request.user.id,int_status=1).update(int_status=-1)

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Toastify from 'toastify-js';
 import { ServerService } from '../../server.service';
-import { Route, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { environment } from '../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -39,7 +39,6 @@ constructor(private serverService:ServerService,private router:Router,private au
     dct_data['intProductId']=this.intProductId
     this.serverService.postData('orders/add_items',dct_data).subscribe(
       (res)=>{
-        console.log(res)
         if (res['status']==1){
           this.showToastSuccess()
           if (status==2){

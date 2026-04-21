@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Toastify from 'toastify-js'
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ServerService } from '../server.service';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';

@@ -1,21 +1,13 @@
 from django.shortcuts import render
 from rest_framework.views import APIView,Response
-from products.models import Category,Products
-from django.contrib.auth.models import User
 from .models import UserDetails
-import os
-from django.core.files.storage import FileSystemStorage
-from datetime import datetime
 from django.db import transaction
 from django.conf import settings
-from django.core.files.uploadedfile import UploadedFile
 from rest_framework import status
 # from django.contrib.
 from django.contrib.auth import authenticate,login,logout
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import IsAuthenticated
 import random
-from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 # Create your views here.
@@ -93,7 +85,6 @@ class LogOutApI(APIView):
             return Response({'status':0,'message':str(e)})
 
 class ChangePassword(APIView):
-    # permission_classes=[IsAuthenticated]
     def post(self,request):
         try:
             
@@ -112,7 +103,6 @@ class ChangePassword(APIView):
             return Response({'status':0,'message':str(e)})
     
 class ForgotPassword(APIView):
-    # permission_classes=[IsAuthenticated]
     def post(self,request):
         try:
             user_email=request.data.get('strEmail')
@@ -122,30 +112,7 @@ class ForgotPassword(APIView):
                 int_otp=random.randint(111111,999999)
                 ins_user.vchr_otp=str(int_otp)
                 ins_user.save()
-            #     subject = "Password Reset OTP"
-            #     message = f"""
-            # Hello {ins_user.email},
 
-            # We received a request to reset your password.
-
-            # Your OTP is: {ins_user.vchr_otp}
-
-            # This OTP is valid for 2 minutes.
-            # Do not share it with anyone.
-
-            # If you did not request this, please ignore this email.
-
-            # Thanks,
-            # Support Team
-            # """
-
-            #     send_mail(
-            #         subject,
-            #         message,
-            #         settings.DEFAULT_FROM_EMAIL,
-            #         [ins_user.email],
-            #         fail_silently=False,
-            #     )
 
                 subject = "Password Reset OTP"
 
@@ -205,6 +172,4 @@ class ForgotPassword(APIView):
         except Exception as e:
             return Response({'status':0,'message':str(e)})
 
-    # dct_data['password']=this.strCurrentPassword
-    # dct_data['newPassword']=this.strNewPassword
-    # dct_data['strEmail']=this.strEmail
+

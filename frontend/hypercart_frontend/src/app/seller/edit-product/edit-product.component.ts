@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import Toastify from 'toastify-js';
 import { ServerService } from '../../server.service';
 import { Router } from '@angular/router';
@@ -125,7 +124,6 @@ getData(){
 
       this.selectedCategory={'id':this.dctProductData['fk_category_id'],'vchr_name':this.dctProductData['fk_category__vchr_name']}
 
-      console.log(this.selectedCategory)
     }
   },(err:any)=>{
     this.spinnerService.hide()
@@ -237,14 +235,12 @@ updateProduct(){
     }
     categoryChanged(category:any){
       this.selectedCategoryId=category.id
-      console.log(this.selectedCategory)
     }
 
     onFileChange1(event:any){
       const file=event.target.files[0]
       if (file){
-        // this.image1=file.name
-        // console.log(file)
+
         this.imageFile1=file
          const reader = new FileReader();
           reader.onload = () => {

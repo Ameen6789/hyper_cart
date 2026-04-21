@@ -4,7 +4,6 @@ import { ProductsRoutingModule } from "../products/products-routing.module";
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 import { ServerService } from '../server.service';
-import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -49,7 +48,6 @@ ngOnInit(): void {
    this.email=localStorage.getItem('email') || ''
    this.access_token=localStorage.getItem('access_token') || ''
    this.userType=localStorage.getItem('user_type') || ''
-   console.log(this.access_token,"ss")
    if (this.access_token){
     this.isLoggedIn$=true
    }
@@ -108,7 +106,7 @@ searchProducts(){
   this.serverService.postData('products/search_product',{'searchTerm':this.searchTerm}).subscribe((res)=>{
     if (res['status']==1){
       this.lstProducts=res['lst_data']
-      console.log(res['lstData'])
+      (res['lstData'])
     }
   },(err)=>{
 
@@ -117,7 +115,6 @@ searchProducts(){
   }
 
   viewProduct(id:any){
-    console.log("asdfdsf")
     localStorage.setItem('productId',String(id))
     this.modalService.dismissAll()
     this.router.navigate(['products/viewproduct'])

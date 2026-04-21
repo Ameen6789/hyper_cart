@@ -27,7 +27,7 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = 'django-insecure-m$faavqp*=)%+c*h$zd&4+pz0drdx9yuv8fcs5+*)k62&4e3=u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False #should be true on dev mode
 
 ALLOWED_HOSTS = ["*"]
 
@@ -153,12 +153,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:4200",
-#     "http://127.0.0.1:4200",
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "http://127.0.0.1:4200",
+    "https://hyper-cart.vercel.app",
+    r"https://.*\.vercel\.app"
     
-# ]
+]
 AUTH_USER_MODEL='users.UserDetails'
 
 

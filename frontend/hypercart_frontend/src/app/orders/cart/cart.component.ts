@@ -33,7 +33,6 @@ onAddressChange(event:any){
     this.AddressId=Number(event.target.value)
   }
 
-  console.log(event)
 }
 showToast() {
   Toastify({

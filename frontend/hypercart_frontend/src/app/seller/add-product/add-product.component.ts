@@ -51,7 +51,6 @@ getCategory(){
     this.spinnerService.hide()
     if (res['status']==1){
       this.lstCategory=res['lstData']
-      console.log(res['lstData'])
     }
   },(err)=>{
     this.spinnerService.hide()
@@ -167,8 +166,7 @@ addProduct(){
     onFileChange1(event:any){
       const file=event.target.files[0]
       if (file){
-        // this.image1=file.name
-        // console.log(file)
+
         this.imageFile1=file
          const reader = new FileReader();
           reader.onload = () => {

@@ -25,6 +25,7 @@ ENV/
 db.sqlite3
 *.sqlite3
 media/
+ProductImages/
 staticfiles/
 static/
 *.mo

@@ -26,7 +26,6 @@ export class ProductsHomeComponent implements OnInit{
 setActive(i: number,label:any) {
   this.selectedIndex = i;
   this.intCategoryId=label.id
-  console.log(this.intCategoryId)
   this.getData()
 }
 getData(){
@@ -58,7 +57,6 @@ getCategory(){
     this.spinnerService.hide()
     if (res['status']==1){
       this.lstCategory=res['lstData']
-      console.log(res['lstData'])
     }
   },(err)=>{
     this.spinnerService.hide()
