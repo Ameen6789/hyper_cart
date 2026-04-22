@@ -5,11 +5,13 @@ from .models import Orders,Cart,OrderDetails,CartDetails,Address
 from products.models import Products
 from datetime import datetime
 from django.db.models import F
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 
 
 class AddItems(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self,request):
         try:
             with transaction.atomic():
@@ -87,6 +89,7 @@ class AddItems(APIView):
             return Response({'status':0,'message':str(e)})
 
 class GetCartItems(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self,request):
         try:
 
@@ -105,6 +108,7 @@ class GetCartItems(APIView):
             return Response({'status':0,'message':str(e)})
 
 class AddAddress(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self,request):
         try:
             with transaction.atomic():
@@ -140,6 +144,7 @@ class AddAddress(APIView):
 
 
 class AddOrder(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self,request):
         try:
             with transaction.atomic():
@@ -181,12 +186,11 @@ class AddOrder(APIView):
                 else:
                     return Response({'status':0,'message':'No Items to Order'})
 
-
-
         except Exception as e:
             return Response({'status':0,'message':str(e)})
         
 class GetOrders(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self,request):
         try:
             lst_data=list(Orders.objects.filter(fk_user_id=request.user.id).order_by('-id').values('id','fk_address__vchr_name','fk_address__vchr_address','fk_address__bint_phone','dat_order','dbl_total_amt'))

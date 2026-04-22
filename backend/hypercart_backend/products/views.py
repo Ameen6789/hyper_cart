@@ -10,6 +10,7 @@ from django.db import transaction
 from django.conf import settings
 from django.core.files.uploadedfile import UploadedFile
 from django.core.files.storage import default_storage
+from rest_framework.permissions import IsAuthenticated
 class ListCategory(APIView):
     def get(self,request):
         try:
@@ -19,6 +20,7 @@ class ListCategory(APIView):
             return Response({'status':0,'message':str(e)})
 
 class AddProduct(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self,request):
         
         try:

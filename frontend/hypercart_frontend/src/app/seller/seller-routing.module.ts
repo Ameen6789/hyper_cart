@@ -5,12 +5,14 @@ import { ListProductComponent } from './list-product/list-product.component';
 import { OrdersComponent } from './orders/orders.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CommonModule } from '@angular/common';
-CommonModule
+import { AuthService } from '../auth.service';
+import { authGuard } from '../auth.gurad';
+
 const routes: Routes = [
-  {path:'addproduct',component:AddProductComponent ,title:'Add Product'},
-  {path:'listproduct',component:ListProductComponent,title:'List Product'},
-  {path:'orders',component:OrdersComponent,title:'All Orders'},
-  {path:'edit-product',component:EditProductComponent,title:"Edit Product"}
+  {path:'addproduct',component:AddProductComponent ,title:'Add Product',canActivate: [authGuard]},
+  {path:'listproduct',component:ListProductComponent,title:'List Product',canActivate: [authGuard]},
+  {path:'orders',component:OrdersComponent,title:'All Orders',canActivate: [authGuard]},
+  {path:'edit-product',component:EditProductComponent,title:"Edit Product",canActivate: [authGuard]}
 
 ];
 

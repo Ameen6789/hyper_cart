@@ -14,7 +14,7 @@
                 </li>
                 <li class="me-3" routerLink="/products/all_products" style="cursor: pointer;">Shop</li>
                 <li class="me-3" (click)="navigate()" style="cursor: pointer;">About Us</li>
-                <li class="me-3" routerLink="/seller/listproduct" style="cursor: pointer;" *ngIf="userType == 'ADMIN'">Seller Dashboard</li>
+                <li class="me-3" routerLink="/seller/listproduct" style="cursor: pointer;" *ngIf="isLoggedIn$ && userType == 'ADMIN'">Seller Dashboard</li>
 
             </ul>
 

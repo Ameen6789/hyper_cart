@@ -10,6 +10,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 import random
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from rest_framework.permissions import IsAuthenticated,AllowAny
+from products.models import Products
 # Create your views here.
 
 class LoginApi(APIView):
@@ -173,3 +175,50 @@ class ForgotPassword(APIView):
             return Response({'status':0,'message':str(e)})
 
 
+class UserPermissionCheck(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self,request):
+        try:
+            
+            route = request.data.get('route', '')
+            # 3. check route permission
+            authorized=False
+            if request.user.is_active:
+                authorized = _check_route_permission(route, request.user.user_type)
+
+            return Response({
+                'authenticated': True,
+                'authorized': authorized,
+                'role': request.user.user_type,
+            }, status=200 if authorized else 403)
+        except Exception as e:
+            return Response({'status':0,'message':str(e)})
+
+def _check_route_permission(route, user_role):
+    ROUTE_PERMISSIONS = {
+    'ADMIN': ['/seller/listproduct','/seller/edit-product','/seller/addproduct','/seller/orders'],
+    }
+    for required_role,paths  in ROUTE_PERMISSIONS.items():
+        for path in paths:
+            if path==route:
+                if required_role.upper() != user_role.upper():
+                    return False
+                else:
+                    return True
+    return True     
+    
+
+class PingView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        try:
+            Products.objects.only("id").first()
+            db_status = "connected"
+        except Exception:
+            db_status = "error"
+
+        return Response({
+            "status": "ok",
+            "db": db_status
+        })
