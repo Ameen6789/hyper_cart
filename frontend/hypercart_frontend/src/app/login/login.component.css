@@ -1,14 +1,7 @@
 body{
-    height: 100vh;
-    min-height: 100vh;
+    height: 100svh;
     background-image: url('/assets/images/login-bg.jpg');
     margin: 0;
     overflow: hidden;
 }
 
-@media (max-width: 768px) {
-body{
-    height: 100svh;
-    min-height: 100svh;
-}
-}

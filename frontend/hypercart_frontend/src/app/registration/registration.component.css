@@ -1,9 +1,10 @@
 body{
-    height: 100vh;
-    min-height: 100vh;
+    height: 100svh;
     background-image: url('/assets/images/login-bg.jpg');
     margin: 0;
     overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
 
 }
 .form-control:focus{
@@ -12,9 +13,3 @@ body{
     box-shadow: none;
 }
 
-@media (max-width: 768px) {
-body{
-    height: 100svh;
-    min-height: 100svh;
-}
-}
