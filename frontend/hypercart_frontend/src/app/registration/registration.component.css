@@ -1,5 +1,5 @@
 body{
-    height: 100vh;
+    height: 100dvh;
     background-image: url('/assets/images/login-bg.jpg');
 
 }
@@ -7,4 +7,10 @@ body{
     outline: 1 px solid rgba(0, 0, 0, 0.452);
     border: 1px solid rgba(0, 0, 0, 0.495);
     box-shadow: none;
+}
+
+@media (max-width: 768px) {
+body{
+    height: 100svh;
+}
 }
