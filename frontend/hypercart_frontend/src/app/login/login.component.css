@@ -2,3 +2,9 @@ body{
     height: 100dvh;
     background-image: url('/assets/images/login-bg.jpg');
 }
+
+@media (max-width: 768px) {
+body{
+    height: 100svh;
+}
+}
