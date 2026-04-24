@@ -1,10 +1,12 @@
 body{
-    height: 100dvh;
+    height: 100vh;
+    min-height: 100vh;
     background-image: url('/assets/images/login-bg.jpg');
 }
 
 @media (max-width: 768px) {
 body{
     height: 100svh;
+    min-height: 100svh;
 }
 }
