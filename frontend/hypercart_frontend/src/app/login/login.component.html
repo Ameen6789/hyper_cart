@@ -16,8 +16,10 @@
         <p style="cursor: pointer;margin-bottom: 0px;font-size: 15px;"><span routerLink="/forgot-password">Forgot Password?</span></p>
 
     </div>
-    <button class="btn w-100 mt-2 text-white" style="background-color: #ea580c;" (click)="login()">LOGIN</button>
-    <p class="pt-3" mb-0>Don't Have an Account?  <a routerLink="/register" style="text-decoration: none;color:  #ea580c;cursor: pointer;">Sign Up Now</a></p>
+    <button class="btn w-100 mt-2 text-white" style="background-color: #ea580c;" (click)="login(false)">LOGIN</button>
+    <p class="pt-3 pb-0  w-100" style="text-align: left;" ><a (click)="login(true)" style="text-decoration: none;color:  #ea580c;cursor: pointer;text-align: left;">Use Demo Account</a></p>
+
+    <p class="pt-1 w-100" >Don't Have an Account?  <a routerLink="/register" style="text-decoration: none;color:  #ea580c;cursor: pointer;">Sign Up Now</a></p>
 
 </div>  
 </body>

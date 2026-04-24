@@ -21,8 +21,11 @@ export class LoginComponent {
   strEmail=''
   strPassword=''
   strErrorText=''
-    login(){
-
+    login(blnDemo:boolean){
+    if (blnDemo){
+      this.strEmail='demo@gmail.com'
+      this.strPassword='Demo@1234'
+    }
     if (!this.strEmail){
       this.strErrorText='Enter Email'
       this.showToast()
@@ -63,6 +66,7 @@ export class LoginComponent {
           localStorage.setItem('user_type',res['data']['user_type'])
           localStorage.setItem('user_id',res['data']['user_id'])
           localStorage.setItem('full_name',res['data']['name'])
+          localStorage.setItem('email',res['data']['email'])
           this.auth.loginSuccess(res['data']['access'], res['data']['refresh']); // 🔥 REQUIRED
 
           this.router.navigate(['/'])

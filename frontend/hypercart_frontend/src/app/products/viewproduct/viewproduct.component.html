@@ -2,14 +2,14 @@
     <div class="image-desc-conatiner mt-4 ">
         <div class="col-md-6  image-container mb-5">
 
-            <div style="background-color:white;border-radius: 10px;height: 508px;width: 100%;object-fit: contain;outline: 1 px solid gray;" class="rounded-5" >
-                <img [src]="mainImage" style="width: 100%;height: 100%;object-fit: contain;outline: 1 px solid gray" alt="">
+            <div style="background-color:white;border-radius: 10px;height: 508px;width: 100%;object-fit: contain;" class="rounded-5" >
+                <img [src]="mainImage" style="width: 100%;height: 100%;object-fit: contain;" alt="">
 
             </div>
             <div class="row g-4 mt-0">
             <div class="col-3" *ngFor="let image of dctData['jsn_images']">
-                <div style="background-color:rgb(107 114 128/.1);cursor: pointer;" class="rounded-2" >
-                    <img src="{{hostname}}{{image}}" class="" alt="" style="width: 100%;height: 100%;object-fit: contain;" loading="lazy" (click)="changeMainImage(hostname+image)">
+                <div style="background-color:rgb(107 114 128/.1);cursor: pointer;outline: 1px solid rgba(41, 40, 40, 0.571);" class="rounded-2 " >
+                    <img src="{{hostname}}{{image}}" class="rounded-2" alt="" style="width: 100%;height: 100%;object-fit: contain;" loading="lazy" (click)="changeMainImage(hostname+image)">
 
                 </div>
             </div>
