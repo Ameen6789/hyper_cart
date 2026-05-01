@@ -150,9 +150,10 @@ class ListProduct(APIView):
 class SearchProduct(APIView):
     def post(self,request):
         try:
+            lst_product=[]
             if request.data.get('searchTerm'):
                 lst_product=Products.objects.filter(vchr_name__icontains=request.data.get('searchTerm')).values('id','vchr_name','vchr_description','fk_category_id','fk_category__vchr_name','dbl_selling_price','dbl_offer_price','jsn_images','int_stock_qty')
-
-                return Response({'status':1,'lst_data':lst_product})
+            
+            return Response({'status':1,'lst_data':lst_product})
         except Exception as e:
             return Response({'status':0,'message':str(e)})

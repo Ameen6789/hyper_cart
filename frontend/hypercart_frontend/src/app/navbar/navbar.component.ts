@@ -106,7 +106,6 @@ searchProducts(){
   this.serverService.postData('products/search_product',{'searchTerm':this.searchTerm}).subscribe((res)=>{
     if (res['status']==1){
       this.lstProducts=res['lst_data']
-      (res['lstData'])
     }
   },(err)=>{
 
