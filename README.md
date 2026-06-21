@@ -221,6 +221,155 @@ cd frontend/hypercart_frontend
 ng serve
 ```
 
+
+# To Run Using Docker
+
+## Prerequisites
+
+* Docker
+* Docker Compose
+
+## Environment Variables
+
+Create a `.env` file inside:
+
+```text
+backend/hypercart_backend/.env
+```
+
+Example:
+
+```env
+
+DB_NAME=db-name
+DB_USER=db-user
+DB_PASSWORD=your-password
+DB_HOST=db
+DB_PORT=5432
+
+POSTGRES_USER=postgres
+POSTGRES_DB=postgres
+POSTGRES_PASSWORD=your-password
+
+EMAIL_HOST_USER=email_host
+EMAIL_HOST_PASSWORD=email_host_password
+
+DEBUG=True
+PRODUCTION=True
+
+
+```
+
+## Build and Run
+
+Build and start all services:
+
+```bash
+docker compose build
+docker compose up
+```
+
+Run in detached mode:
+
+```bash
+docker compose build
+docker compose up -d
+```
+
+Stop the application:
+
+```bash
+docker compose down
+```
+
+## Database Migrations
+
+
+
+## Create Superuser
+
+```bash
+docker compose exec api python manage.py createsuperuser
+```
+
+## View Logs
+
+All services:
+
+```bash
+docker compose logs
+```
+
+API service:
+
+```bash
+docker compose logs -f api
+```
+
+Frontend service:
+
+```bash
+docker compose logs -f web
+```
+
+Database service:
+
+```bash
+docker compose logs -f db
+```
+
+## Access the Application
+
+Frontend:
+
+```text
+http://localhost:4200
+```
+
+Backend API:
+
+```text
+http://localhost:8000
+```
+
+Admin Panel:
+
+```text
+http://localhost:8000/admin
+```
+
+## Rebuild After Dependency Changes
+
+Backend:
+
+```bash
+docker compose build api
+```
+
+Frontend:
+
+```bash
+docker compose build web
+```
+
+Rebuild everything:
+
+```bash
+docker compose build --no-cache
+```
+
+## Remove Containers and Volumes
+
+```bash
+docker compose down -v
+```
+
+Note: This will delete the PostgreSQL database volume and all stored data.
+
+
+
+
+
 ---
 
 
