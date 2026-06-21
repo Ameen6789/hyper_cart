@@ -10,12 +10,20 @@ USER node
 
 COPY --chown=node:node . .
 
-RUN npm run build
+### uncomment for production
 
-FROM nginx:alpine 
+# RUN npm run build
 
-COPY --from=builder /app/dist/hypercart_frontend/browser usr/share/nginx/html
+# FROM nginx:alpine 
 
-EXPOSE 80
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# CMD ["npx","ng","serve","--host","0.0.0.0","--port","4200","--poll","1000"]
+# COPY --from=builder /app/dist/hypercart_frontend/browser usr/share/nginx/html
+
+# EXPOSE 80
+
+### uncomment for production
+
+EXPOSE 4200
+
+CMD ["npx","ng","serve","--host","0.0.0.0","--port","4200","--poll","1000"]

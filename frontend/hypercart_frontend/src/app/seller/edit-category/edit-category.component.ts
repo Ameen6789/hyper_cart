@@ -117,7 +117,7 @@ updateCategory(){
          <div style="background-color:#16a34a;margin-right:7px;border-radius:50%;width:22px;height:22px;" class="d-flex align-items-center justify-content-center">
           <i class="fa-solid fa-check tick-icon" style="font-size:12px;"></i>
           </div>
-          <span class="text-black">Product Updated Successfully</span>
+          <span class="text-black">Category Updated Successfully</span>
         </div>
         `,
         escapeMarkup: false,
