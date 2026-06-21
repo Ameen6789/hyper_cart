@@ -11,13 +11,49 @@ from django.conf import settings
 from django.core.files.uploadedfile import UploadedFile
 from django.core.files.storage import default_storage
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
 class ListCategory(APIView):
     def get(self,request):
         try:
-            lst_category=list(Category.objects.filter(int_status=1).values('id','vchr_name'))
-            return Response({'status':1,'lstData':lst_category})
+            int_category_id=request.GET.get('intCategoryId')
+            if int_category_id:
+                ins_category=Category.objects.filter(int_status=1,id=int_category_id).values('id','vchr_name').first()
+                if ins_category:
+                    return Response({'status':1,'ins_category':ins_category})
+                else:
+                    return Response({'status':0,'message':'Not Found'},status=status.HTTP_404_NOT_FOUND)
+
+            else:
+                lst_category=list(Category.objects.filter(int_status=1).values('id','vchr_name'))
+                return Response({'status':1,'lstData':lst_category},status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'status':0,'message':str(e)})
+        
+    def post(self,request):
+        try:
+            vchr_category=request.data.get("strCategory")
+            Category.objects.create(vchr_name=vchr_category,dat_created=datetime.now(),int_status=1)
+            return Response({'status':1,'message':'success'},status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'status':0,'message':str(e)})  
+
+
+    def put(self,request):
+        try:
+            vchr_category=request.data.get("strCategory")
+            int_category_id=request.data.get('intCategoryId')
+            if int_category_id:
+                ins_category=Category.objects.filter(id=int(int_category_id)).first()
+                if ins_category:
+                    ins_category.vchr_name=vchr_category
+                    ins_category.dat_updated=datetime.now()
+                    ins_category.save()
+            else:
+                return Response({'status':0,'message':'Not Found'},status=status.HTTP_404_NOT_FOUND)
+            return Response({'status':1,'message':'success'},status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'status':0,'message':str(e)})    
+
 
 class AddProduct(APIView):
     permission_classes = [IsAuthenticated]

@@ -18,7 +18,7 @@
                 </li>
 
                 <li class="d-flex align-items-center justify-content-start "> 
-                    <a routerLink="/seller/addproduct" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="px-3 py-2 d-flex active">
+                    <a routerLink="/seller/addproduct" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="px-3 py-2 d-flex  active">
                         <i class="fa-regular fa-square-plus" ></i>
                         <span class="nav-text d-md-flex align-items-center">Add Product</span> 
                     </a>
@@ -26,46 +26,60 @@
 
                 <li class="d-flex align-items-center justify-content-start "> 
                     <a routerLink="/seller/listproduct" routerLinkActive="active" class="px-3 py-2 d-flex">
-                        <i class="fa-solid fa-list-check" ></i> 
+                        <i class="fa-solid fa-list-check " ></i> 
                         <span class="nav-text d-md-flex align-items-center"> Product List</span>
                     </a>
                 </li>
 
                 <li class=" d-flex align-items-center justify-content-start "> 
                     <a routerLink="/seller/orders" routerLinkActive="active" class="px-3 py-2 d-flex">
-                        <i class="fa-solid fa-box-open"></i> 
+                        <i class="fa-solid fa-box-open "></i> 
                         <span class="nav-text d-md-flex align-items-center">All Orders</span>
                     </a>
                 </li>
             </ul>
         </nav>
     </div>
-    <div class="right-container p-4 w-100" >
-        <p class="mt-3 fw-bold" style="font-size: 18px;">Orders</p>
-        <div class="row d-flex border-top" *ngFor="let data of lstData" style="margin-left: 0;">
-            <div class="col-12  col-lg-3  d-flex pt-3 mt-2">
-                <img src="assets/images/box_icon.svg" width="64px" height="64px" alt="" srcset="" >
-                <div class="ms-3 w-100" style="font-size: 14px;">
-                    <p class="fw-medium">{{data['products']}} </p>
-                    <p>Item:{{data['int_items']}}</p>
-                </div>
-            </div>
-            <div class="col-12  col-lg-3 pt-3 mt-2" style="font-size: 14px;">
-                <p class="fw-medium mb-0">{{data['fk_address__vchr_name']}}</p>
-                <p>{{data['fk_address__vchr_address']}} <br>{{data['fk_address__bint_phone']}}</p>
+    <div class="right-container p-4 pt-5 ms-2" style="width: 100%;">
+        <div>
+            <p class="fw-semibold fs-5" style="color: #374151;">All Categoris</p>
+    <div class="table-container" style="width:100%;">
+    <table style="
+        width:100%;
+        min-width:700px;
+        border:1px solid #37415147;
+        border-radius:5px;
+        border-collapse:separate;
+        border-spacing:0;
+    ">
+        <thead>
+            <tr style="background:#f9fafb;">
+                <th style="padding:12px; border-bottom:1px solid #37415147;">Category</th>
+                <th style="padding:12px; border-bottom:1px solid #37415147;">Action</th>
+            </tr>
+        </thead>
 
-            </div>
-            <div class="col-12  col-lg-3 pt-3 mt-2 d-flex align-items-center justify-content-start" style="font-size: 14px;">
-                <p class="fw-medium" >₹{{data['dbl_total_amt']}} </p>
+        <tbody>
+            <tr *ngFor="let category of lstCategories">
 
-            </div>
-            
-            <div class="col-12  col-lg-3 pt-3 mb-2 mt-2" style="font-size: 14px;">
-                <p class="mb-0">Method:CASH </p>
-                <p class="mb-0">Date:{{data['dat_order'] | date:'d/M/Y'}}</p>
-                <p>payment:pending</p>
+                <td style="
+                    padding:12px;
+                    border-bottom:1px solid #37415147;
+                    word-break:break-word;
+                ">
+                    {{category['vchr_name']}}
+                </td>
 
-            </div>
+
+
+                <td style="padding:12px; border-bottom:1px solid #37415147;">
+
+                    <i class="fa-solid fa-pencil ms-2" title="Edit Category" style="cursor: pointer;color:#ea580c;" (click)="editCategory(category)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
         </div>
 

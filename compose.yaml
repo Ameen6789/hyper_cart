@@ -1,0 +1,70 @@
+services:
+  web:
+    build: ./frontend/hypercart_frontend
+    depends_on:
+      - api
+    ports:
+      - 4200:80
+    networks:
+      - my-app-network
+
+    develop:
+      watch:
+      - path: ./frontend/hypercart_frontend/package.json
+        action: rebuild
+      - path: ./frontend/hypercart_frontend/package-lock.json
+        action: rebuild
+      - path: ./frontend/hypercart_frontend
+        target: /app
+        action: sync
+    
+
+
+
+  api:
+    depends_on:
+      - db
+    build: ./backend/hypercart_backend
+    networks:
+      - my-app-network
+
+    ports:
+      - 8000:8000
+    develop:
+      watch:
+        - path: ./backend/hypercart_backend/requirements.txt
+          action: rebuild
+        - path: ./backend/hypercart_backend
+          target: /app
+          action: sync
+
+    command: sh -c "chown -R appuser:appuser /app/media && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+      
+    env_file:
+      - ./backend/hypercart_backend/.env
+    
+    volumes:
+      - media_data:/app/media
+
+  db:
+    image: postgres:17.7
+    env_file:
+      ./backend/hypercart_backend/.env
+
+    networks:
+      - my-app-network
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+
+volumes:
+  db_data:
+  media_data:
+
+networks:
+  my-app-network:
+
+
+
+
+

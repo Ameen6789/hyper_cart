@@ -197,7 +197,7 @@ class UserPermissionCheck(APIView):
 
 def _check_route_permission(route, user_role):
     ROUTE_PERMISSIONS = {
-    'ADMIN': ['/seller/listproduct','/seller/edit-product','/seller/addproduct','/seller/orders'],
+    'ADMIN': ['/seller/listproduct','/seller/editproduct','/seller/addproduct','/seller/orders'],
     }
     for required_role,paths  in ROUTE_PERMISSIONS.items():
         for path in paths:

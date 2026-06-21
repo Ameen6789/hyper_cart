@@ -2,7 +2,6 @@
     <div class="nav-container">
         <nav>
             <ul class="ps-0 pt-2 navbar-nav">
-
                 <li class="d-flex align-items-center justify-content-start "> 
                     <a routerLink="/seller/addcategory" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="px-3 py-2 d-flex  active">
                         <i class="fa-regular fa-square-plus" ></i>
@@ -16,6 +15,7 @@
                         <span class="nav-text d-md-flex align-items-center">List Category</span> 
                     </a>
                 </li>
+
 
                 <li class="d-flex align-items-center justify-content-start "> 
                     <a routerLink="/seller/addproduct" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="px-3 py-2 d-flex  active">
@@ -42,7 +42,7 @@
     </div>
     <div class="right-container p-4" style="max-width: 490px;">
         
-        <div>
+        <!-- <div>
             <p class="fw-semibold">Product Image</p>
 
             <div class="d-flex flex-wrap" >
@@ -109,47 +109,20 @@
 
 
             </div>
-        </div>
+        </div> -->
 
         
 
 
         <div class="mt-3">
-            <p class="fw-semibold">Product Name</p>
+            <p class="fw-semibold">Category Name</p>
 
-            <input type="text" name="" id="" required [(ngModel)]="strProduct" placeholder="Enter Product" class="ps-2 form-control">
-        </div>
-        <div class="mt-4">
-            <p class="fw-semibold">Product Description</p>
-            <textarea name="" id="" required rows="5" [(ngModel)]="strProductDescription" placeholder="Product Description" class="ps-2 form-control" style="resize: none;"></textarea>
+            <input type="text" name="" id="" required [(ngModel)]="strCategoryname" placeholder="Enter Category" class="ps-2 form-control">
         </div>
 
-        <div class="d-md-flex mt-4 row">
-            <div class="col-6  col-md-6 pe-3 mb-3">
-                <p class="fw-semibold">Category</p>
-                <select name="" id="" class="form-select" [(ngModel)]="selectedCategory"
-                 (ngModelChange)="categoryChanged($event)" [compareWith]="compareCategory">
-                    <option   *ngFor="let cat of lstCategory" [ngValue]="cat">{{cat.vchr_name}}</option>
 
-                </select>
-            </div >
-            <div class="col-6 col-md-6">
-                <p class="fw-semibold">Stock</p>
 
-                <input type="number" name="" required id="" [(ngModel)]="intStock" min="0"  placeholder="0" class="ps-2 form-control">
-            </div>
-            <div class="col-6  col-md-6 pe-3">
-                <p class="fw-semibold">Product Price</p>
-
-                <input type="number" name="" required id=""  [(ngModel)]="intProductPrice" placeholder="0" class="ps-2 form-control">
-            </div>
-            <div class="col-6 col-md-6">
-                <p class="fw-semibold">Offer Price</p>
-
-                <input type="number" name="" required id=""  [(ngModel)]="intOfferPrice" placeholder="0" class="ps-2 form-control">
-            </div>
-        </div>
-        <button class="btn text-white mt-2 px-4 rounded-1" style="background-color: #ea580c;" (click)="updateProduct()">UPDATE</button>
+        <button class="btn text-white mt-2 px-4 rounded-1" style="background-color: #ea580c;" (click)="updateCategory()">UPDATE</button>
 
     </div>
 </div>

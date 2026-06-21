@@ -1,4 +1,4 @@
 export const environment = {
-  production: true, //false if in dev mode , true in production
-  apiUrl: 'https://hyper-cart.onrender.com/',//use local backend url when in dev mode
+  production: false, //false if in dev mode , true in production
+  apiUrl: 'http://127.0.0.1:8000/',//use local backend url when in dev mode
 };

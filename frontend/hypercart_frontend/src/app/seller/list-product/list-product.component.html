@@ -2,6 +2,21 @@
     <div class="nav-container">
         <nav>
             <ul class="ps-0 pt-2 navbar-nav">
+
+                <li class="d-flex align-items-center justify-content-start "> 
+                    <a routerLink="/seller/addcategory" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="px-3 py-2 d-flex  active">
+                        <i class="fa-regular fa-square-plus" ></i>
+                        <span class="nav-text d-md-flex align-items-center">Add Category</span> 
+                    </a>
+                </li>
+
+                <li class="d-flex align-items-center justify-content-start "> 
+                    <a routerLink="/seller/listcategory" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="px-3 py-2 d-flex  active">
+                        <i class="fa-solid fa-list-check" ></i>
+                        <span class="nav-text d-md-flex align-items-center">List Category</span> 
+                    </a>
+                </li>
+
                 <li class="d-flex align-items-center justify-content-start "> 
                     <a routerLink="/seller/addproduct" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="px-3 py-2 d-flex  active">
                         <i class="fa-regular fa-square-plus" ></i>

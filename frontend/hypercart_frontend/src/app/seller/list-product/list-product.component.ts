@@ -36,7 +36,7 @@ viewProduct(product:any){
 }
 editProduct(product:any){
   localStorage.setItem('productId',product.id)
-  this.router.navigate(['/seller/edit-product'])
+  this.router.navigate(['/seller/editproduct'])
 
 }
 listProduct(){
