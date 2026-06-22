@@ -241,8 +241,8 @@ Example:
 
 ```env
 
-DB_NAME=db-name
-DB_USER=db-user
+DB_NAME=postgres
+DB_USER=postgres
 DB_PASSWORD=your-password
 DB_HOST=db
 DB_PORT=5432
@@ -255,7 +255,7 @@ EMAIL_HOST_USER=email_host
 EMAIL_HOST_PASSWORD=email_host_password
 
 DEBUG=True
-PRODUCTION=True
+PRODUCTION=False
 
 
 ```
