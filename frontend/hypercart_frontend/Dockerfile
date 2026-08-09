@@ -6,11 +6,10 @@ COPY package*.json .
 
 RUN npm install
 
-RUN chown -R node:node /app
+COPY --chown=node:node . .
 
 USER node
 
-COPY --chown=node:node . .
 
 ### uncomment for production
 

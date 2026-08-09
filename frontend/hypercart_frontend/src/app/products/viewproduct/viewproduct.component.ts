@@ -18,7 +18,7 @@ constructor(private serverService:ServerService,private router:Router,private au
   dctData:any={}
   hostname=''
   mainImage=''
-  lstData=[]
+  lstData:any[]=[]
   isLoggedIn$:any
   ngOnInit(): void {
     this.intProductId=localStorage.getItem('productId') || ''

@@ -39,7 +39,6 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-              # 👈 MUST be first
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -115,6 +114,14 @@ DATABASES = {
             'OPTIONS': {
             'options': '-c client_encoding=UTF8',
         }
+}
+
+CACHES={
+    'default':{
+        "BACKEND":'django_redis.cache.RedisCache',
+        "LOCATION":os.getenv('REDIS_URL')
+    },
+
 }
 
 

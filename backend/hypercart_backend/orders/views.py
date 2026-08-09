@@ -6,6 +6,7 @@ from products.models import Products
 from datetime import datetime
 from django.db.models import F
 from rest_framework.permissions import IsAuthenticated
+from django.core.cache import cache
 # Create your views here.
 
 

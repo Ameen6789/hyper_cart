@@ -12,6 +12,9 @@ from django.core.files.uploadedfile import UploadedFile
 from django.core.files.storage import default_storage
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+from django.core.cache import cache
+import os
+
 class ListCategory(APIView):
     def get(self,request):
         try:
@@ -24,7 +27,8 @@ class ListCategory(APIView):
                     return Response({'status':0,'message':'Not Found'},status=status.HTTP_404_NOT_FOUND)
 
             else:
-                lst_category=list(Category.objects.filter(int_status=1).values('id','vchr_name'))
+                lst_category=cache.get_or_set("lst_category",list(Category.objects.filter(int_status=1).values('id','vchr_name')),timeout=300)
+
                 return Response({'status':1,'lstData':lst_category},status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'status':0,'message':str(e)})
@@ -96,6 +100,7 @@ class AddProduct(APIView):
                 if lst_images:
                     ins_product.jsn_images=lst_images
                 ins_product.save()
+                cache.delete("lst_products")
 
                 return Response({'status':1,'message':'Success'})
         except Exception as e:
@@ -103,7 +108,10 @@ class AddProduct(APIView):
     def put(self,request):
         try:
             if request.data.get('intProductId'):
-                ins_product=Products.objects.filter(int_status=1,id=request.data.get('intProductId')).values('id','vchr_name','vchr_description','fk_category_id','fk_category__vchr_name','dbl_selling_price','dbl_offer_price','jsn_images','int_stock_qty').first()
+                ins_product=cache.get_or_set(
+                    f'lst_products:{request.data.get('intProductId')}',
+                    Products.objects.filter(int_status=1,id=request.data.get('intProductId')).values('id','vchr_name','vchr_description','fk_category_id','fk_category__vchr_name','dbl_selling_price','dbl_offer_price','jsn_images','int_stock_qty').first(),
+                    timeout=300)
                 return Response({'status':1,'data':ins_product})
         except Exception as e:
             return Response({'status':0,'message':str(e)})
@@ -154,6 +162,8 @@ class AddProduct(APIView):
                         ins_product.jsn_images=lst_images
                     ins_product.save()
 
+                    cache.delete('lst_products')
+                    cache.delete(f'lst_products:{request.data.get('intProductId')}')
                     return Response({'status':1,'message':'Success'})
         except Exception as e:
             return Response({'status':0,'message':str(e)})
@@ -161,7 +171,10 @@ class AddProduct(APIView):
 class ListProduct(APIView):
     def get(self,request):
         try:
-            lst_products=list(Products.objects.filter(int_status=1).values('id','vchr_name','fk_category__vchr_name','dbl_selling_price','jsn_images'))
+            lst_products=cache.get("lst_products")
+            if not lst_products:
+                lst_products=list(Products.objects.filter(int_status=1).values('id','vchr_name','fk_category__vchr_name','dbl_selling_price','jsn_images'))
+                cache.set("lst_products",lst_products,timeout=600)
             return Response({'status':1,'lstData':lst_products})
         except Exception as e:
             return Response({'status':0,'message':str(e)})
@@ -188,8 +201,8 @@ class SearchProduct(APIView):
         try:
             lst_product=[]
             if request.data.get('searchTerm'):
-                lst_product=Products.objects.filter(vchr_name__icontains=request.data.get('searchTerm')).values('id','vchr_name','vchr_description','fk_category_id','fk_category__vchr_name','dbl_selling_price','dbl_offer_price','jsn_images','int_stock_qty')
-            
+                cache_key =f"search_prodducts:{request.data.get('searchTerm')}"
+                lst_product=cache.get_or_set(cache_key, Products.objects.filter(vchr_name__icontains=request.data.get('searchTerm')).values('id','vchr_name','vchr_description','fk_category_id','fk_category__vchr_name','dbl_selling_price','dbl_offer_price','jsn_images','int_stock_qty'),timeout=300)
             return Response({'status':1,'lst_data':lst_product})
         except Exception as e:
             return Response({'status':0,'message':str(e)})
