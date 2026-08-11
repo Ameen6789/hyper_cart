@@ -7,6 +7,10 @@ from datetime import datetime
 from django.db.models import F
 from rest_framework.permissions import IsAuthenticated
 from django.core.cache import cache
+from users.models import UserDetails
+from .tasks import send_order_confirmation_email_task
+from django.db import connection
+
 # Create your views here.
 
 
@@ -154,12 +158,18 @@ class AddOrder(APIView):
                 dbl_total_amount=request.data.get('dblTotalAmount')
                 if lst_data and len(lst_data)>0:
                     overall_total_amount=0
-                    
+
+                    with connection.cursor() as cursor:
+                        cursor.execute("SELECT nextval('order_number_seq')")
+                        order_number = cursor.fetchone()[0]
+
+
                     ins_order=Orders.objects.create(
                         dat_order=datetime.now(),
                         fk_user_id=request.user.id,
                         fk_address_id=int_address_id,
-                        int_fop=1
+                        int_fop=1,
+                        order_number=order_number
                     )
                     for data in lst_data:
                         OrderDetails.objects.create(
@@ -183,6 +193,9 @@ class AddOrder(APIView):
                     ins_order.dbl_total_amt=dbl_total_amount
                     ins_order.save()
                     Cart.objects.filter(fk_user_id=request.user.id,int_status=1).update(int_status=-1)
+                    user_email=UserDetails.objects.filter(id=request.user.id).values("email").first()["email"]
+                    send_order_confirmation_email_task.apply_async(args=[ins_order.id, user_email], countdown=1)
+
                     return Response({'status':1,'message':'Success'})
                 else:
                     return Response({'status':0,'message':'No Items to Order'})

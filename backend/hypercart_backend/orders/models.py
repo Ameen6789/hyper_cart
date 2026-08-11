@@ -36,6 +36,12 @@ class Address(models.Model):
 
 class Orders(models.Model):
     dat_order=models.DateTimeField(blank=True,null=True)
+    order_number = models.BigIntegerField(
+        unique=True,
+        editable=False,
+        default=0000
+    )
+
     fk_user=models.ForeignKey(UserDetails,models.DO_NOTHING,blank=True,null=True)
     fk_address=models.ForeignKey(Address,models.DO_NOTHING,blank=True,null=True)
     int_fop=models.IntegerField(blank=True,null=True)

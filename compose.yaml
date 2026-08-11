@@ -63,10 +63,19 @@ services:
       - my-app-network
     env_file:
       ./backend/hypercart_backend/.env
-    # command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes
     volumes:
       - redis_data:/data
 
+  worker:
+    build: ./backend/hypercart_backend
+    command: celery -A hypercart_backend worker --loglevel=info
+    depends_on:
+      - api
+      - redis
+    networks:
+      - my-app-network
+    env_file:
+      ./backend/hypercart_backend/.env
 
 volumes:
   db_data:
